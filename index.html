@@ -1,0 +1,2819 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EMLE Nov 2026 Master Hub | دليلك التفاعلي لامتحان مزاولة المهنة</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cairo & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#1e1b4b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Cairo', 'Inter', sans-serif;
+    }
+    .ltr-text {
+      direction: ltr;
+      text-align: left;
+      font-family: 'Inter', 'Cairo', sans-serif;
+    }
+    .story-term {
+      background: linear-gradient(120deg, rgba(99, 102, 241, 0.22) 0%, rgba(16, 185, 129, 0.22) 100%);
+      border-bottom: 2px dashed #6366f1;
+      padding: 0 6px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      direction: ltr;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+    .story-term.masked {
+      color: transparent !important;
+      background: #4f46e5 !important;
+      border-bottom: 2px solid #818cf8;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+    .story-term.masked::after {
+      content: "اضغط للتسميع";
+      color: #ffffff;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.72rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+    .repeat-badge {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.1);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.5);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
+
+  <!-- Top Sticky Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/85 dark:bg-slate-900/85 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-600 via-purple-600 to-emerald-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+          <i class="fa-solid fa-user-doctor text-xl"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-black text-lg sm:text-xl tracking-tight bg-gradient-to-l from-indigo-600 to-emerald-500 dark:from-indigo-400 dark:to-emerald-400 bg-clip-text text-transparent">
+              EMLE Nov 2026 Master Hub
+            </h1>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-500/30">
+              766 Key-Facts
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            الامتحان القومي لمزاولة مهنة الطب البشري - دور نوفمبر 2026
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Stats & Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden md:flex items-center gap-2 bg-slate-100 dark:bg-slate-800/90 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+          <i class="fa-solid fa-fire text-amber-500"></i>
+          <span>تم إتقان:</span>
+          <strong id="headerMasteredCount" class="text-indigo-600 dark:text-indigo-400 font-black">0</strong>
+          <span>بطاقة</span>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-2 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-xl border border-emerald-500/20 text-xs font-bold">
+          <i class="fa-regular fa-clock"></i>
+          <span id="nextExamCountdownText">الامتحان التجريبي: 22 نوفمبر</span>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition" title="تغيير المظهر">
+          <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-auto">
+      <nav class="flex space-x-2 space-x-reverse py-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm font-bold whitespace-nowrap">
+        <button onclick="switchTab('schedule')" id="tab-schedule" class="nav-tab px-4 py-2 rounded-xl transition flex items-center gap-2 bg-indigo-600 text-white shadow-md shadow-indigo-500/20">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>خطة الأيام والمواعيد</span>
+        </button>
+        <button onclick="switchTab('stories')" id="tab-stories" class="nav-tab px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-book-open-reader text-amber-500"></i>
+          <span>حكايات مستشفى الأبطال (Story Mode)</span>
+        </button>
+        <button onclick="switchTab('flashcards')" id="tab-flashcards" class="nav-tab px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-layer-group text-emerald-500"></i>
+          <span>البطاقات الذكية & البحث (75 بطاقة)</span>
+        </button>
+        <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-stethoscope text-rose-500"></i>
+          <span>امتحان المحاكاة التفاعلي (75 MCQs)</span>
+        </button>
+        <button onclick="switchTab('cheat')" id="tab-cheat" class="nav-tab px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i class="fa-solid fa-bolt text-purple-500"></i>
+          <span>كبسولة ليلة الامتحان (Top Repeats)</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+
+    <!-- ==========================================
+         TAB 1: SCHEDULE & DAILY MEMORY SYSTEM
+    =========================================== -->
+    <section id="section-schedule" class="space-y-6">
+      <!-- Official Exam Dates Banner -->
+      <div class="bg-gradient-to-br from-indigo-900 via-slate-900 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-500/30 relative overflow-hidden">
+        <div class="relative z-10 space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold border border-amber-400/30 mb-2">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                مواعيدك الرسمية من بيان المجلس الصحي المصري - دور نوفمبر 2026
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-black">خريطة معركة الامتحان القومي (22 إلى 30 نوفمبر 2026)</h2>
+              <p class="text-slate-300 text-sm mt-1">
+                تنبيه هام من البيان الرسمي: كسر أي قاعدة أو إلغاء أي امتحان يمنع دخول باقي الامتحانات في نفس الدور! التزم بالمواعيد بدقة.
+              </p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 text-center min-w-[220px]">
+              <p class="text-xs text-indigo-200">العد التنازلي للامتحان الفعلي الأول</p>
+              <div id="mainCountdownBox" class="text-xl sm:text-2xl font-black text-amber-300 mt-1">25 نوفمبر - 11:00 ص</div>
+              <p class="text-[11px] text-slate-300 mt-1">مدة كل امتحان: ساعتان كاملتان</p>
+            </div>
+          </div>
+
+          <!-- 4 Official Exam Milestones -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white/10 hover:bg-white/15 transition rounded-2xl p-4 border border-white/15 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs text-sky-300 font-bold mb-2">
+                  <span>1. الامتحان التجريبي</span>
+                  <span class="px-2 py-0.5 rounded-md bg-sky-500/20 border border-sky-400/30">ساعتان</span>
+                </div>
+                <h3 class="text-lg font-black">الأحد 22 نوفمبر 2026</h3>
+                <p class="text-xs text-slate-300 mt-1">متاح للدخول خلال اليوم (لتجربة السيستم والمنصة)</p>
+              </div>
+              <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+                <span class="text-emerald-300 font-bold"><i class="fa-solid fa-laptop-medical ml-1"></i>اختبار تقني</span>
+                <button onclick="switchTab('quiz')" class="underline hover:text-amber-300">تدرب الآن</button>
+              </div>
+            </div>
+
+            <div class="bg-white/10 hover:bg-white/15 transition rounded-2xl p-4 border border-amber-400/30 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs text-amber-300 font-bold mb-2">
+                  <span>2. امتحان المحاكاة</span>
+                  <span class="px-2 py-0.5 rounded-md bg-amber-500/20 border border-amber-400/30">ساعتان</span>
+                </div>
+                <h3 class="text-lg font-black">الاثنين 23 نوفمبر 2026</h3>
+                <p class="text-xs text-amber-200 font-bold mt-1"><i class="fa-regular fa-clock ml-1"></i>الساعة 11:00 صباحاً بالضبط</p>
+              </div>
+              <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+                <span class="text-amber-300 font-bold"><i class="fa-solid fa-gauge-high ml-1"></i>بروفة حقيقية</span>
+                <button onclick="switchTab('quiz')" class="underline hover:text-amber-300">ابدأ محاكاة</button>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-rose-500/30 to-indigo-600/30 rounded-2xl p-4 border-2 border-rose-400/60 flex flex-col justify-between shadow-lg">
+              <div>
+                <div class="flex items-center justify-between text-xs text-rose-200 font-bold mb-2">
+                  <span>3. الامتحان الفعلي (اليوم 1)</span>
+                  <span class="px-2 py-0.5 rounded-md bg-rose-500/40 border border-rose-300/40">ساعتان</span>
+                </div>
+                <h3 class="text-lg font-black text-white">الأربعاء 25 نوفمبر 2026</h3>
+                <p class="text-xs text-rose-200 font-bold mt-1"><i class="fa-solid fa-bell ml-1"></i>الساعة 11:00 صباحاً</p>
+              </div>
+              <div class="mt-4 pt-2 border-t border-white/15 flex items-center justify-between text-xs">
+                <span class="text-white font-bold">🔥 نصف الطريق للترخيص</span>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-emerald-500/30 to-teal-600/30 rounded-2xl p-4 border-2 border-emerald-400/60 flex flex-col justify-between shadow-lg">
+              <div>
+                <div class="flex items-center justify-between text-xs text-emerald-200 font-bold mb-2">
+                  <span>4. الامتحان الفعلي (اليوم 2)</span>
+                  <span class="px-2 py-0.5 rounded-md bg-emerald-500/40 border border-emerald-300/40">ساعتان</span>
+                </div>
+                <h3 class="text-lg font-black text-white">الاثنين 30 نوفمبر 2026</h3>
+                <p class="text-xs text-emerald-200 font-bold mt-1"><i class="fa-solid fa-bell ml-1"></i>الساعة 11:00 صباحاً</p>
+              </div>
+              <div class="mt-4 pt-2 border-t border-white/15 flex items-center justify-between text-xs">
+                <span class="text-white font-bold">🎓 مسك الختام والترخيص</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Invented 4-Phase Daily Memory Method -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div>
+            <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase">طريقتك المبتكرة للحفظ بدون نسيان</span>
+            <h3 class="text-xl font-black mt-0.5">نظام الـ 4 كبسولات اليومية (4-Anchor Memory Loop)</h3>
+          </div>
+          <span class="text-xs bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 px-3 py-1.5 rounded-xl font-bold border border-indigo-200 dark:border-indigo-800">
+            مصممة لتثبيت 766 معلومة في الذاكرة طويلة المدى قبل 25 نوفمبر
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200/70 dark:border-amber-800/50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black"><i class="fa-solid fa-mug-hot"></i></span>
+              <span class="text-xs font-bold text-amber-700 dark:text-amber-300">9:00 ص - 11:00 ص</span>
+            </div>
+            <h4 class="font-bold text-base">1. قهوة الحكايات (Story Encoding)</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              اقرأ فصلين من <strong>"حكايات مستشفى الأبطال"</strong> بصوت مسموع. مخك بيربط القصة الطفولية بالمصطلح الإنجليزي ومستحيل ينساه في اللجنة!
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/20 border border-indigo-200/70 dark:border-indigo-800/50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black">11</span>
+              <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300">11:00 ص - 1:00 ظ</span>
+            </div>
+            <h4 class="font-bold text-base">2. سبرينت الساعة 11 (Bio-Clock Sync)</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              بما أن كل امتحاناتك الساعة <strong>11 صباحاً</strong>، لازم كل يوم الساعة 11 تحل 25 سؤال MCQ عشان تضبط ساعتك البيولوجية وأقصى تركيزك في نفس الموعد!
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200/70 dark:border-emerald-800/50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black"><i class="fa-solid fa-bolt"></i></span>
+              <span class="text-xs font-bold text-emerald-700 dark:text-emerald-300">5:00 م - 7:00 م</span>
+            </div>
+            <h4 class="font-bold text-base">3. فلتر التكرارات (x17 to x5 Flashcards)</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              افتح البطاقات الذكية واختار فلتر <strong>Ultra High-Yield (x7-x17)</strong>. هذه النقاط وحدها تمثل أكثر من 60% من أسئلة الامتحان المتكررة.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-purple-50/70 dark:bg-purple-950/20 border border-purple-200/70 dark:border-purple-800/50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center font-black"><i class="fa-solid fa-moon"></i></span>
+              <span class="text-xs font-bold text-purple-700 dark:text-purple-300">10:00 م (قبل النوم)</span>
+            </div>
+            <h4 class="font-bold text-base">4. مراجعة الـ 15 دقيقة قبل النوم</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              راجع فقط البطاقات التي ضغطت عليها <strong>"راجعها تاني"</strong> + جدول الأرقام الذهبية في كبسولة ليلة الامتحان أثناء تثبيت الذاكرة خلال النوم.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day-by-Day Interactive Checklist (Nov 18 to Nov 30) -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 class="text-xl font-black">جدول المهام اليومي التفاعلي (من اليوم 18 نوفمبر حتى 30 نوفمبر)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">اضغط على أي مهمة لوضع علامة صح وحفظ تقدمك تلقائياً على جهازك، أو اضغط على زر التخصص للانتقال لقسمه مباشرة.</p>
+          </div>
+          <div class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl">
+            نسبة إنجاز الخطة: <span id="planProgressPercent">0%</span>
+          </div>
+        </div>
+
+        <div id="dailyPlanGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 2: BEDTIME STORY MODE (حكايات مستشفى الأبطال)
+    =========================================== -->
+    <section id="section-stories" class="hidden space-y-6">
+      <div class="bg-gradient-to-r from-amber-500/15 via-indigo-500/15 to-emerald-500/15 dark:from-amber-500/10 dark:via-indigo-500/10 dark:to-emerald-500/10 rounded-3xl p-6 border border-amber-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-amber-600 dark:text-amber-400">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>طريقة الحفظ القصصي السريع (Bilingual Child-Like Story Memory Engine)</span>
+          </div>
+          <h2 class="text-2xl font-black">حكايات "مستشفى الأبطال الصغار" - كل قصة تجمع أهم أسئلة التخصص!</h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            تخيل إننا بنحكي حدوتة قبل النوم لطفل ذكي جداً، كل شخصية في الحدوتة شايلة <span class="story-term">Key-Fact</span> ورقم تكراره في الامتحان <span class="px-1.5 py-0.5 rounded bg-rose-500 text-white text-xs repeat-badge">x17</span> عشان تفتكرها في ثانية واحدة في اللجنة!
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="toggleStoryAnswers()" id="toggleBlankBtn" class="px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md transition flex items-center gap-2">
+            <i class="fa-solid fa-eye-slash"></i>
+            <span>وضع التسميع (إخفاء المصطلحات الإنجليزية)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chapter Selector Buttons -->
+      <div id="storyChaptersNav" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <!-- Populated via JS -->
+      </div>
+
+      <!-- Active Story Reader Card -->
+      <div id="activeStoryContainer" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-lg space-y-6">
+        <!-- Populated via JS -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 3: SMART FLASHCARDS & SEARCH ENGINE
+    =========================================== -->
+    <section id="section-flashcards" class="hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-black flex items-center gap-2">
+              <i class="fa-solid fa-layer-group text-emerald-500"></i>
+              <span>بنك البطاقات الذكية المفلتر بالتكرار (75 High-Yield Flashcards)</span>
+            </h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              اضغط على زر الإظهار لرؤية الـ Key-Fact الأصلي + شفرة الحفظ السريع، أو ابحث عن أي مرض أو كلمة مفتاحية.
+            </p>
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative w-full lg:w-96">
+            <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3.5 text-slate-400"></i>
+            <input
+              type="text"
+              id="flashcardSearchInput"
+              oninput="renderFlashcards()"
+              placeholder="ابحث بالإنجليزي أو العربي (مثال: cholecystitis, C3, مرارة)..."
+              class="w-full pr-10 pl-4 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+        </div>
+
+        <!-- Specialty & Yield Filter Pills -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+          <div class="flex flex-wrap items-center gap-1.5" id="fcSpecialtyFilters">
+            <button onclick="setFcSpecialty('ALL')" data-spec="ALL" class="fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white">الكل (75)</button>
+            <button onclick="setFcSpecialty('Pediatrics')" data-spec="Pediatrics" class="fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200">👶 أطفال (22)</button>
+            <button onclick="setFcSpecialty('Internal Medicine')" data-spec="Internal Medicine" class="fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200">🫀 باطنة (18)</button>
+            <button onclick="setFcSpecialty('General Surgery')" data-spec="General Surgery" class="fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200">🔪 جراحة (15)</button>
+            <button onclick="setFcSpecialty('Ob/Gyn')" data-spec="Ob/Gyn" class="fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200">🤰 نساء وتوليد (10)</button>
+            <button onclick="setFcSpecialty('Emergency')" data-spec="Emergency" class="fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200">🚑 طوارئ (5)</button>
+            <button onclick="setFcSpecialty('Ethics & Safety')" data-spec="Ethics & Safety" class="fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200">⚖️ أخلاقيات وسلامة (5)</button>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-1.5">
+            <select id="fcYieldFilter" onchange="renderFlashcards()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <option value="ALL">كل درجات التكرار (All Repeats)</option>
+              <option value="ULTRA">🔥 Ultra High-Yield (تكرر 7 إلى 17 مرة)</option>
+              <option value="HIGH">⚡ High-Yield (تكرر 4 إلى 6 مرات)</option>
+              <option value="REVIEW">📌 يحتاج مراجعة (Review Again)</option>
+              <option value="MASTERED">✅ تم إتقانه (Mastered)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flashcards Grid -->
+      <div id="flashcardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Populated via JS -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 4: INTERACTIVE CLINICAL MCQ SIMULATOR
+    =========================================== -->
+    <section id="section-quiz" class="hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400 text-xs font-bold">
+                محاكي الامتحان الحقيقي
+              </span>
+              <span id="quizTimerBadge" class="px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-xs font-bold font-inter">
+                <i class="fa-regular fa-clock ml-1"></i>02:00:00
+              </span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black mt-1">امتحان المحاكاة التفاعلي (Real Exam High-Yield Vignettes)</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              أسئلة إكلينيكية (Case Scenarios) باللغة الإنجليزية مع خلط تلقائي للاختيارات وشرح فوري بالعربي والإنجليزي بعد كل سؤال.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="quizSpecialtySelect" onchange="startNewQuiz()" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold">
+              <option value="ALL">🏥 امتحان شامل كل التخصصات (75 High-Yield MCQs)</option>
+              <option value="Pediatrics">👶 الأطفال فقط (Pediatrics - 22 MCQs)</option>
+              <option value="Internal Medicine">🫀 الباطنة فقط (Internal Medicine - 18 MCQs)</option>
+              <option value="General Surgery">🔪 الجراحة العامة فقط (General Surgery - 15 MCQs)</option>
+              <option value="Ob/Gyn">🤰 النساء والتوليد فقط (Ob/Gyn - 10 MCQs)</option>
+              <option value="Emergency">🚑 الطوارئ والإنعاش فقط (Emergency - 5 MCQs)</option>
+              <option value="Ethics & Safety">⚖️ الأخلاقيات وسلامة المرضى (Ethics & Safety - 5 MCQs)</option>
+            </select>
+
+            <button onclick="shuffleAndRestartQuiz()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-shuffle"></i>
+              <span>خلط الأسئلة وبدء جديد</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Score & Progress Bar -->
+        <div class="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+          <div class="flex items-center justify-between text-xs font-bold">
+            <span>السؤال <strong id="currentQIndexText">1</strong> من <strong id="totalQCountText">75</strong></span>
+            <div class="flex items-center gap-4">
+              <span class="text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-circle-check ml-1"></i>صحيحة: <strong id="correctScoreText">0</strong></span>
+              <span class="text-rose-600 dark:text-rose-400"><i class="fa-solid fa-circle-xmark ml-1"></i>خاطئة: <strong id="wrongScoreText">0</strong></span>
+              <span class="text-indigo-600 dark:text-indigo-400">النسبة: <strong id="accuracyScoreText">0%</strong></span>
+            </div>
+          </div>
+          <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div id="quizProgressBar" class="h-full bg-gradient-to-r from-indigo-500 to-emerald-500 transition-all duration-300" style="width: 2%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Question Card -->
+      <div id="activeQuestionCard" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-lg space-y-6">
+        <!-- Populated via JS -->
+      </div>
+
+      <!-- Question Navigator Pills -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-3">خريطة الأسئلة السريعة (اضغط للانتقال لأي سؤال):</p>
+        <div id="questionPillsContainer" class="flex flex-wrap gap-1.5">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 5: EXAM EVE SUPER CHEAT SHEET
+    =========================================== -->
+    <section id="section-cheat" class="hidden space-y-6">
+      <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-purple-500/30">
+        <span class="px-3 py-1 rounded-full bg-purple-400/20 text-purple-200 text-xs font-bold border border-purple-400/30">
+          ⚡ المراجعة الذهبية السريعة
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">كبسولة ليلة الامتحان: أعلى 22 معلومة تكراراً + الأرقام الحاسمة</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          هذه الصفحة مخصصة للمراجعة السريعة صباح يوم 22، 23، 25، و30 نوفمبر قبل الساعة 11:00 صباحاً.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Top Repeated Monsters (x8 to x17) -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <h3 class="text-lg font-black flex items-center gap-2 text-rose-600 dark:text-rose-400">
+            <i class="fa-solid fa-crown"></i>
+            <span>ملوك التكرار في الامتحان (Top Ultra-Repeats: x8 to x17)</span>
+          </h3>
+          <div id="topMonstersList" class="space-y-3 text-xs sm:text-sm">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Golden Numbers & Cutoffs Table -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <h3 class="text-lg font-black flex items-center gap-2 text-amber-600 dark:text-amber-400">
+            <i class="fa-solid fa-hashtag"></i>
+            <span>الأرقام والمعادلات الذهبية في ملف الـ Key-Facts</span>
+          </h3>
+          <div class="space-y-2.5 text-xs sm:text-sm">
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">محلول الجفاف الشديد في الأطفال (Severe Pediatric Dehydration)</span>
+              <span class="ltr-text font-black text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg">20 mL/kg Isotonic Saline (x17)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">نسبة الإنعاش القلبي في حديثي الولادة مقابل الكبار</span>
+              <span class="ltr-text font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">Neonate 3:1 (x6) | Adult 30:2 (x3)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">الوقت الذهبي لإنقاذ التواء الخصية (Testicular Torsion)</span>
+              <span class="ltr-text font-black text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-lg">Within 4 - 6 hours (x10 total)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">هدف السكر في العناية المركزة (ICU Hyperglycemia Target)</span>
+              <span class="ltr-text font-black text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-lg">140 - 180 mg/dL IV Insulin (x7)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">موعد الولادة في Antiphospholipid Syndrome + Preeclampsia</span>
+              <span class="ltr-text font-black text-purple-600 dark:text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-lg">Delivery at 34 weeks (x7)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">الجرح المتأخر الممنوع خياطته أولياً (Delayed Laceration)</span>
+              <span class="ltr-text font-black text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-lg">> 6 - 12 hours -> Secondary intention (x6)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">عمر النصف للهيبارين قبل الجراحة (Heparin Half-life)</span>
+              <span class="ltr-text font-black text-sky-600 dark:text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-lg">Resolves in 2 - 3 hours (x10 total)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">Prolonged Latent Phase of Labor</span>
+              <span class="ltr-text font-black text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg">> 20 hrs Nullipara | > 14 hrs Multipara (x5)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">استئصال الورم الغدي الكبدي (Hepatic Adenoma Resection)</span>
+              <span class="ltr-text font-black text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">> 5 cm or symptomatic (x4)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">إيقاف الوارفارين قبل الجراحة الاختيارية (BRIDGE Trial)</span>
+              <span class="ltr-text font-black text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-lg">Stop 5 days prior without bridging (x2)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">تطهير أسطح مستشفى من أبواغ C. difficile spores</span>
+              <span class="ltr-text font-black text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-lg">1:10 diluted bleach solution (x2)</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 flex justify-between items-center gap-2">
+              <span class="font-bold">ترتيب لبس الواقيات الشخصية (Donning PPE Sequence)</span>
+              <span class="ltr-text font-black text-purple-600 dark:text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-lg">Gown -> Mask -> Face Shield -> Gloves (x2)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800 mt-12 space-y-2">
+    <p>صُمم خصيصاً لاجتياز الامتحان القومي المصري لمزاولة مهنة الطب البشري (دور نوفمبر 2026) بتفوق • جميع الـ Key-Facts مستخرجة بدقة 100% من ملف المراجعة النهائية.</p>
+    <p class="text-indigo-600 dark:text-indigo-400 font-bold">
+      🤍 نسألكم دعوة بظهر الغيب لصاحب هذا العمل بالتوفيق والبركة وتيسير الأمور.
+    </p>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT ENGINE & COMPLETE MEDICAL DATABASE
+  =========================================== -->
+  <script>
+    // ==========================================
+    // 1. DAILY STUDY PLAN DATA (Nov 18 to Nov 30, 2026)
+    // ==========================================
+    const DAILY_PLAN = [
+      {
+        day: "اليوم 1 • الأربعاء 18 نوفمبر",
+        badge: "اليوم الحالي",
+        badgeColor: "bg-indigo-600 text-white",
+        focus: "أطفال (Pediatrics): الجهاز الهضمي والتنفسي والطوارئ",
+        targetTab: "stories",
+        storyIdx: 0,
+        tasks: [
+          { id: "d1_t1", text: "قراءة حدوتة عنبر الأطفال (Severe dehydration x17, RSV x15, PDA x10)" },
+          { id: "d1_t2", text: "مراجعة بطاقات الأطفال عالية التكرار (Celiac x8, Pyloric stenosis x6, Intussusception x9)" },
+          { id: "d1_t3", text: "حل 22 سؤال أطفال في محاكي الامتحان التفاعلي" }
+        ]
+      },
+      {
+        day: "اليوم 2 • الخميس 19 نوفمبر",
+        badge: "تثبيت الأطفال والباطنة",
+        badgeColor: "bg-emerald-600 text-white",
+        focus: "أطفال (كلى ودم وحديثي الولادة) + باطنة (قلب وصدر)",
+        targetTab: "stories",
+        storyIdx: 1,
+        tasks: [
+          { id: "d2_t1", text: "قراءة حدوتة القلب والرئة في الباطنة (Pulmonary edema x15, Mitral stenosis x10, CAP x8)" },
+          { id: "d2_t2", text: "حفظ نقاط كلى ودم الأطفال (Minimal change x10, PSGN low C3 x9, IDA x9)" },
+          { id: "d2_t3", text: "سبرينت الساعة 11 صباحاً: حل 20 سؤال باطنة وأطفال" }
+        ]
+      },
+      {
+        day: "اليوم 3 • الجمعة 20 نوفمبر",
+        badge: "الباطنة المتكاملة",
+        badgeColor: "bg-purple-600 text-white",
+        focus: "باطنة: الدم، الروماتيزم، الجهاز الهضمي، الكبد، الغدد، الأعصاب",
+        targetTab: "stories",
+        storyIdx: 1,
+        tasks: [
+          { id: "d3_t1", text: "تثبيت ملوك الباطنة (vWD x15, Acute Gout x10, Upper GI bleed x8, Bell's palsy x7)" },
+          { id: "d3_t2", text: "مراجعة الغدد والكبد (ICU glucose 140-180 x7, Myxedema coma x6, PSC x5, Brucellosis x6)" },
+          { id: "d3_t3", text: "حل أسئلة الباطنة الكاملة (18 سؤالاً) في المحاكي" }
+        ]
+      },
+      {
+        day: "اليوم 4 • السبت 21 نوفمبر",
+        badge: "الجراحة العامة",
+        badgeColor: "bg-rose-600 text-white",
+        focus: "الجراحة العامة: البطن الحادة، الأورام، الكسور، والأوعية",
+        targetTab: "stories",
+        storyIdx: 2,
+        tasks: [
+          { id: "d4_t1", text: "قراءة حدوتة غرفة عمليات الجراحة (Cholecystitis x11, Pancreatitis x10, Appendicitis x9)" },
+          { id: "d4_t2", text: "تثبيت جراحة الشرج والكسور (Hemorrhoids x8, Colonoscope LGIB x8, Gallstone ileus x7, Pelvic fracture x6)" },
+          { id: "d4_t3", text: "الاستعداد للامتحان التجريبي غداً والتأكد من جاهزية الكمبيوتر والإنترنت" }
+        ]
+      },
+      {
+        day: "اليوم 5 • الأحد 22 نوفمبر",
+        badge: "🖥️ يوم الامتحان التجريبي",
+        badgeColor: "bg-sky-500 text-white animate-pulse",
+        focus: "دخول الامتحان التجريبي (ساعتان) + النساء والتوليد (الجزء 1)",
+        targetTab: "stories",
+        storyIdx: 3,
+        tasks: [
+          { id: "d5_t1", text: "✅ دخول الامتحان التجريبي الرسمي على موقع المجلس الصحي (متاح خلال اليوم - ساعتان)" },
+          { id: "d5_t2", text: "قراءة حدوتة النساء والتوليد (Gonorrhea/Chlamydia x12, 2nd degree tear x9, Mittelschmerz x8)" },
+          { id: "d5_t3", text: "حفظ وسائل منع الحمل وPID with IUD (x8)" }
+        ]
+      },
+      {
+        day: "اليوم 6 • الاثنين 23 نوفمبر",
+        badge: "⏱️ يوم امتحان المحاكاة 11 ص",
+        badgeColor: "bg-amber-500 text-slate-950 font-black animate-pulse",
+        focus: "امتحان المحاكاة الرسمي 11:00 ص + طوارئ النساء والولادة",
+        targetTab: "stories",
+        storyIdx: 3,
+        tasks: [
+          { id: "d6_t1", text: "✅ أداء امتحان المحاكاة الرسمي الساعة 11:00 صباحاً بالضبط (ساعتان)" },
+          { id: "d6_t2", text: "تثبيت حمل الخطر (GDM diet/exercise x7, Cholestasis x7, APS 34w x7, MgSO4 x6)" },
+          { id: "d6_t3", text: "حل كل أسئلة النساء والتوليد (10 أسئلة مجمعة) في المحاكي" }
+        ]
+      },
+      {
+        day: "اليوم 7 • الثلاثاء 24 نوفمبر",
+        badge: "ليلة الامتحان الفعلي الأول",
+        badgeColor: "bg-indigo-700 text-white",
+        focus: "الطوارئ + الأخلاقيات وسلامة المرضى + كبسولة ليلة الامتحان",
+        targetTab: "stories",
+        storyIdx: 4,
+        tasks: [
+          { id: "d7_t1", text: "قراءة حدوتة الطوارئ والأخلاقيات (Autonomy x8, Cricothyrotomy x6, Time-out x6, Hand hygiene x6)" },
+          { id: "d7_t2", text: "مراجعة التسمم والإنعاش (Atropine in Organophosphate x5, Pneumothorax tube x5, PE Heparin x4)" },
+          { id: "d7_t3", text: "مراجعة صفحة (كبسولة ليلة الامتحان) والنوم مبكراً قبل 11 مساءً" }
+        ]
+      },
+      {
+        day: "اليوم 8 • الأربعاء 25 نوفمبر",
+        badge: "🔥 الامتحان الفعلي الأول 11 ص",
+        badgeColor: "bg-rose-600 text-white font-black",
+        focus: "الامتحان الفعلي الأول الساعة 11:00 صباحاً (ساعتان)",
+        targetTab: "cheat",
+        storyIdx: 5,
+        tasks: [
+          { id: "d8_t1", text: "9:30 ص: نظرة سريعة على جدول الأرقام الذهبية وملوك التكرار (x17 - x8)" },
+          { id: "d8_t2", text: "🎯 11:00 ص: أداء الامتحان الفعلي الأول بهدوء وثقة كاملة" },
+          { id: "d8_t3", text: "مساءً: راحة تامة وتفريغ الذهن استعداداً لشوط الإثنين" }
+        ]
+      },
+      {
+        day: "الأيام 9-12 • (26 إلى 29 نوفمبر)",
+        badge: "معسكر الشوط الثاني",
+        badgeColor: "bg-teal-600 text-white",
+        focus: "تصفية البطاقات المؤجلة + التركيز على النقاط المتوسطة (x3 - x5)",
+        targetTab: "flashcards",
+        storyIdx: 0,
+        tasks: [
+          { id: "d9_t1", text: "مراجعة كل البطاقات المصنفة تحت (راجعها تاني) في الـ 6 تخصصات" },
+          { id: "d9_t2", text: "إعادة قراءة الـ 6 حكايات في وضع التسميع (إخفاء المصطلحات الإنجليزية)" },
+          { id: "d9_t3", text: "حل الامتحان الشامل 75 سؤالاً بنسبة دقة تتجاوز 95%" }
+        ]
+      },
+      {
+        day: "اليوم 13 • الاثنين 30 نوفمبر",
+        badge: "🎓 الامتحان الفعلي الثاني 11 ص",
+        badgeColor: "bg-emerald-600 text-white font-black",
+        focus: "الامتحان الفعلي الثاني الساعة 11:00 صباحاً ومسك الختام",
+        targetTab: "cheat",
+        storyIdx: 0,
+        tasks: [
+          { id: "d10_t1", text: "9:30 ص: مراجعة كبسولة ليلة الامتحان والأرقام السريعة" },
+          { id: "d10_t2", text: "🏆 11:00 ص: أداء الامتحان الفعلي الثاني والاحتفال بترخيص مزاولة المهنة!" }
+        ]
+      }
+    ];
+
+    // ==========================================
+    // 2. BEDTIME STORY MODE DATABASE (6 Chapters)
+    // ==========================================
+    const STORY_CHAPTERS = [
+      {
+        id: "peds",
+        title: "1. حدوتة عنبر الأطفال",
+        subtitle: "Pediatrics (190 Facts)",
+        icon: "fa-baby",
+        color: "from-sky-500 to-indigo-600",
+        maxRepeat: "x17",
+        intro: "كان يا ما كان، في مستشفى الأبطال الصغار، دخلنا عنبر الأطفال لقينا 12 طفل كل واحد فيهم جاي بلغز بيتكرر في كل امتحان مزاولة مهنة.. تعال نحكي حكايتهم كأننا بنحكيها لطفل صغير!",
+        paragraphs: [
+          {
+            icon: "💧",
+            heading: "الفصل الأول: البطل عطشان والنفس السريع (x17 & x15)",
+            story: `أول ما دخلنا العنبر، لقينا طفل صغير عطشان جداً وعنده جفاف شديد <span class="story-term">Severe pediatric dehydration</span> (وده أهم سؤال في الامتحان كله اتكرر <strong>17 مرة x17</strong>!). الطفل ده مش قادر يشرب، فالدكتور الشاطر جري علشان يديله دفعة حياة سريعة في الوريد: <span class="story-term">Rapid IV resuscitation with 20 mL/kg bolus of isotonic saline</span> (افتكر الرقم السحري: <strong>20 ملي لكل كيلو محلول ملح</strong>!). أما لو كان جفافه خفيف وبيقدر يشرب <span class="story-term">Mild to moderate dehydration</span> بنديله محلول معالجة الجفاف بالفم <span class="story-term">Oral rehydration therapy (ORT)</span> (x2).
+            <br><br>
+            وفي السرير اللي جنبه، نونو عمره أقل من سنتين بيزيق وبيصفر بصدره <span class="story-term">Wheezing & respiratory distress</span> بعد دور برد؛ ده اسمه التهاب الشعيبات الهوائية <span class="story-term">Bronchiolitis</span>، ومين العفريت الصغير اللي بيعمله؟ فيروس <span class="story-term">Respiratory Syncytial Virus (RSV)</span> (اتكرر <strong>15 مرة x15</strong>!). والعلاج بتاعه مش مضاد حيوي أبداً، ده علاج داعم بس: شفط المخاط وتنظيف مجرى الهواء والترطيب والأكسجين لو الأكسجين قليل <span class="story-term">Supportive care: airway clearance via suctioning, hydration & supplemental oxygen</span> (x6).`
+          },
+          {
+            icon: "🚂",
+            heading: "الفصل الثاني: القطار اللي في القلب والولد اللي بيكح زي الفقمة (x10 & x10 & x7)",
+            story: `بعدين حطينا السماعة على صدر بيبي تحت الترقوة الشمال <span class="story-term">Second left intercostal space</span>، سمعنا صوت ماكينة قطار شغالة ليل ونهار مابتقفش <span class="story-term">Continuous machinery-like murmur</span>! الطفل ضحك وقالنا: دي القناة الشريانية المفتوحة <span class="story-term">Patent Ductus Arteriosus (PDA)</span> (<strong>x10</strong>). أما لو طفل بيزرق <span class="story-term">Cyanosis & clubbing</span> ولما يتعب يقعد القرفصاء <span class="story-term">Squatting</span> عشان يزود الأكسجين، ده رباعي فالوت <span class="story-term">Tetralogy of Fallot</span> (x4). ولو طفل عنده متلازمة داون <span class="story-term">Down syndrome</span> لازم نعمله إيكو <span class="story-term">Screening echocardiography</span> لأن أشهر عيب خلقي في قلبه هو <span class="story-term">Atrioventricular septal defect (AVSD)</span> (x3)، بينما أشهر عيب قلب خلقي في الأطفال عموماً هو ثقب بين البطينين <span class="story-term">Ventricular septal defect (VSD)</span> (x2).
+            <br><br>
+            وفجأة! دخل طفل فجأة بيزيق من ناحية واحدة بس في صدره <span class="story-term">Unilateral wheezing, diminished air entry & unilateral hyperinflation on CXR</span>! الدكتور قال: بس! ده بلع فول سوداني أو لعبة وقفت في الشعب الهوائية <span class="story-term">Foreign body aspiration</span> ولازم يدخل فوراً يعمل منظار شعبي <span class="story-term">Urgent diagnostic and therapeutic bronchoscopy</span> (<strong>x10</strong>).
+            <br><br>
+            أما الطفل اللي بيكح كحة عاملة زي نباح الكلب أو الفقمة <span class="story-term">Barking cough & inspiratory stridor</span> وفي أشعة الرقبة فيه برج الكنيسة <span class="story-term">Steeple sign</span>، ده عنده الخناق <span class="story-term">Croup</span> وبنعالجه بجلسة أدرينالين وكورتيزون <span class="story-term">Nebulized epinephrine & corticosteroids (dexamethasone)</span> (<strong>x6</strong>). لكن لو الطفل سخن جداً، ومش عارف يبلع وريالته نازلة <span class="story-term">High fever, drooling, muffled voice</span> وقاعد ساند بإيديه لقدام زي الحامل الثلاثي <span class="story-term">Tripod posture</span>، إياك تفتح بقه بخافض لسان! ده <span class="story-term">Epiglottitis</span> ولازم نأمن مجرى الهواء بأنبوبة حنجرية في غرفة العمليات فوراً ومضاد حيوي وريدي <span class="story-term">Immediate airway securing via intubation in the OR + IV antibiotics</span> (<strong>x7</strong>).
+            <br><br>
+            ولو طفل جاي يشتكي من وجع في بطنه كأنه زائدة دودية <span class="story-term">Mimicking acute abdomen</span> بس هو بيكح وسخن، صور صدره الأول <span class="story-term">Chest X-ray</span> لأن التهاب الفص السفلي الأيمن للرئة <span class="story-term">Right lower lobe pneumonia</span> بيضحك علينا ويعمل وجع بطن (<strong>x7</strong>)! ولو طفل عنده حساسية صدر <span class="story-term">Asthma</span> وبياخد بخاخة كورتيزون بجرعة صغيرة <span class="story-term">Low-dose inhaled corticosteroids (ICS)</span> ولسه مش متحكمين فيها، الخطوة الجاية نزودله موسع شعب طويل المفعول <span class="story-term">Add a long-acting beta-2 agonist (LABA)</span> مش نزود جرعة الكورتيزون (<strong>x8</strong>).`
+          },
+          {
+            icon: "🍓",
+            heading: "الفصل الثالث: مربى الكشمش والزيتونة وعيش القمح (x9 & x8 & x6)",
+            story: `في ركن جراحة الأطفال، لقينا نونو بيعيط بنوبات مغص شديدة وبيرفع رجليه على بطنه <span class="story-term">Intermittent colicky abdominal pain & drawing up of legs</span>، ولما عمل حمام لقيناه شبه مربى الكشمش الأحمر <span class="story-term">Redcurrant-jelly stools</span>، وفي السونار لقينا علامة الهدف <span class="story-term">Target sign</span>! ده المصران دخل جوه بعضه <span class="story-term">Intussusception</span> (<strong>x9</strong>)، وعلاجه وتشخيصه مع بعض بحقنة هواء أو صبغة شرجية <span class="story-term">Air or contrast enema</span>.
+            <br><br>
+            وجنبه رضيع عمره 3 لـ 6 أسابيع، كل ما يرضع يرجع اللبن نافورة لبعيد ومفيش فيها صفارة خضراء <span class="story-term">Non-bilious projectile vomiting</span>، ولما حسينا بطنه لقينا كلكوعة صغيرة قد الزيتونة <span class="story-term">Olive-shaped epigastric mass</span>! ده ضيق بواب المعدة <span class="story-term">Congenital hypertrophic pyloric stenosis</span>، ومن كتر ترجيع حمض المعدة دمه بقى قلوي وناقص كلور وبوتاسيوم <span class="story-term">Hypochloremic, hypokalemic metabolic alkalosis</span> (<strong>x6</strong>). أما لو مولود عنده متلازمة داون وبيرجع أخضر <span class="story-term">Bilious vomiting</span> وفي الأشعة فقاعتين هواء <span class="story-term">Double-bubble sign</span>، ده انسداد الاثنى عشر <span class="story-term">Duodenal atresia</span> (x5).
+            <br><br>
+            وطفل تاني كل ما ياكل عيش أو قمح يجيله إسهال ووزنه مابيزيدش <span class="story-term">Malabsorption & failure to thrive</span>؛ عملناله تحليل الأجسام المضادة <span class="story-term">Tissue transglutaminase (tTG) antibodies</span> طلع حساسية القمح <span class="story-term">Celiac disease</span> (<strong>x8</strong>).`
+          },
+          {
+            icon: "🩸",
+            heading: "الفصل الرابع: الكلية الزعلانة ونقص الحديد وحضّانة المواليد (x10 & x9 & x8)",
+            story: `في غرفة الكلى والدم: طفل جسمه مورم وبوله فيه زلال كتير <span class="story-term">Nephrotic syndrome</span> وضغطه طبيعي، أشهر سبب في الأطفال هو <span class="story-term">Minimal change disease</span> وعلاجه السحري كورتيزون بالفم <span class="story-term">Oral corticosteroids</span> (<strong>x10</strong>). أما الطفل اللي جاله التهاب في زوره، وبعدها بأسبوعين بوله بقى لونه أحمر زي الشاي وفيه <span class="story-term">Red cell casts</span>، ده <span class="story-term">Post-streptococcal glomerulonephritis (PSGN)</span> وأهم كلمة سر في دمه إن المكمل التالت واطي <span class="story-term">Low serum C3 levels</span> (<strong>x9</strong>)!
+            <br><br>
+            ولقينا طفل شاحب وبيشتهي ياكل تراب أو تلج <span class="story-term">Pica</span>؛ سألنا مامته قالت ده بيرضع طبيعي بس بدون حديد بعد 6 شهور <span class="story-term">Prolonged exclusive breastfeeding without iron</span> أو بيشرب لبن بقري كتير جداً <span class="story-term">Excessive cow's milk intake</span>؛ ده أنيميا نقص الحديد <span class="story-term">Iron deficiency anemia</span> وأدق تحليل يكشفها هو مخزون الحديد <span class="story-term">Serum ferritin</span> (<strong>x9</strong>). ولو طفل كويس جداً بس بعد دور برد بـ 2-3 أسابيع ظهر عنده نقط حمراء <span class="story-term">Isolated thrombocytopenia & petechiae</span>، دي <span class="story-term">ITP</span> وفي الحالات البسيطة علاجها المتابعة بس بدون أدوية <span class="story-term">Observation</span> (<strong>x7</strong>).
+            <br><br>
+            وأخيراً في الحضّانة: لو أم عندها فيروس بي نشط <span class="story-term">HBsAg-positive mother</span> ولدت، البيبي لازم ياخد الحارسين مع بعض أول ما يتولد (خلال 12 ساعة): التطعيم والأجسام المضادة <span class="story-term">Both Hepatitis B vaccine AND Hepatitis B immunoglobulin (HBIG) at birth</span> (<strong>x8</strong>). ولما نعمل إنعاش لمولود جديد <span class="story-term">Neonatal resuscitation</span> بنبدأ بتنشيفه وتدفئته بفوطة <span class="story-term">Dry and stimulate with a towel</span>، ولو احتاج ضغطات صدر مع تنفس بتكون النسبة <span class="story-term">3:1 ratio</span> (<strong>x6</strong>) مش 30:2 زي الكبار!`
+          }
+        ]
+      },
+      {
+        id: "im",
+        title: "2. حدوتة قصر الباطنة",
+        subtitle: "Internal Medicine (182 Facts)",
+        icon: "fa-heart-pulse",
+        color: "from-rose-500 to-purple-600",
+        maxRepeat: "x15",
+        intro: "في قصر الباطنة الكبير، عندنا ملوك متوجين بيتكرروا من 6 لـ 15 مرة في كل امتحان.. تعال نقابلهم في جولة سريعة وممتعة!",
+        paragraphs: [
+          {
+            icon: "🫀",
+            heading: "الفصل الأول: الملك اللي بيغرق والصمام الضيق (x15 & x10 & x6)",
+            story: `أول أوضة في قصر الباطنة فيها مريض مش قادر ياخد نفسه وهو نايم <span class="story-term">Orthopnea</span> ورئته مليانة مية <span class="story-term">Acute pulmonary edema</span>؛ مين المنقذ الأول اللي بيجفف المية فوراً؟ مدرات البول الوريدية <span class="story-term">Intravenous loop diuretics (Furosemide)</span> (اتكررت <strong>15 مرة x15</strong>!).
+            <br><br>
+            في السرير التاني، حطينا السماعة على قمة القلب <span class="story-term">Cardiac apex</span> سمعنا خبطة قوية في الأول <span class="story-term">Loud S1</span>، وبعدها طرقعة فتح الصمام <span class="story-term">Opening snap</span>، وبعدها دمدمة في نص الانبساط <span class="story-term">Mid-diastolic murmur</span>؛ ده ضيق الصمام الميترالي <span class="story-term">Mitral stenosis</span> (<strong>x10</strong>). أما لو سمعنا الصوت التاني للقلب لقينا صوت الرئة عالي جداً <span class="story-term">Loud pulmonic component of S2 (Loud P2)</span>، ده معناه إن ضغط شريان الرئة عالي <span class="story-term">Pulmonary arterial hypertension</span> (<strong>x6</strong>). ولو مريض جلطة قلب <span class="story-term">Acute MI</span> نبضه بطئ ودايخ <span class="story-term">Symptomatic sinus bradycardia</span> بنديله فوراً <span class="story-term">Intravenous atropine</span> (x5).`
+          },
+          {
+            icon: "🩸",
+            heading: "الفصل الثاني: الأميرة اللي بتنزف وإصبع النقرس الملتهب (x15 & x10 & x7)",
+            story: `قابلنا في قسم الدم أميرة كل ما تتخبط تنزف من اللثة والأنف، عملنا ليها تحاليل لقينا وقت النزيف طويل <span class="story-term">Prolonged bleeding time</span> وكمان الـ <span class="story-term">Mildly prolonged aPTT</span>؛ ليه الاتنين طوال؟ لأن عندها نقص في عامل <span class="story-term">Von Willebrand disease (vWD)</span> (اتكرر <strong>15 مرة x15</strong>!)، والعامل ده بيشتغل شغلانتين: بيلزق الصفائح وبيحمي <span class="story-term">Factor VIII</span> من التكسير! أما لو مريض صفائحه عالية جداً، إزاي نفرق بين الأورام الأولية <span class="story-term">Essential thrombocytosis</span> والصفائح التفاعلية؟ وجود أعراض الأوعية أو الجلطات أو النزيف <span class="story-term">Presence of vasomotor symptoms, thrombosis, or hemorrhage</span> (<strong>x7</strong>).
+            <br><br>
+            وفي قسم الروماتيزم، راجل صباع رجله الكبير وارم وأحمر وبيصرخ منه <span class="story-term">Acute gout flare</span> (<strong>x10</strong>): في الهجمة الحادة بنطفي النار بـ <span class="story-term">NSAIDs, colchicine, or corticosteroids</span>، وإياك تبدأ دواء تنزيل اليوريك أسيد <span class="story-term">Allopurinol</span> وقت الهجمة الحادة! بنستنى لحد ما الهجمة تهدى خالص <span class="story-term">Initiated AFTER the acute episode has resolved</span>. ولو مريض صدفيه <span class="story-term">Psoriasis</span> مفاصله اتدمرت تماماً وبقت عاملة زي التلسكوب، ده اسمه <span class="story-term">Arthritis mutilans</span> (<strong>x6</strong>).`
+          },
+          {
+            icon: "🫁",
+            heading: "الفصل الثالث: الالتهاب الرئوي والمنظار العاجل وخيط كرون (x8 & x8 & x7 & x6)",
+            story: `دخلنا عنبر الصدر: مريض كبير عنده أمراض مزمنة وجاله التهاب رئوي شديد من المجتمع <span class="story-term">Severe community-acquired pneumonia (CAP) with comorbidities</span>؛ بنديله الثنائي الذهبي مع بعض: <span class="story-term">Beta-lactam (e.g., ceftriaxone) PLUS a Macrolide (e.g., azithromycin)</span> (<strong>x8</strong>). ولو شخص معندوش أي أعراض بس اختبار الدرن في الجلد إيجابي وأشعة الصدر سليمة <span class="story-term">Latent tuberculosis infection</span>، بنعالجه بـ <span class="story-term">Isoniazid (INH) for 6 months</span> (x5).
+            <br><br>
+            وفي قسم الجهاز الهضمي: مريض بياخد مسكنات كتير <span class="story-term">Chronic NSAID use</span> وجاله نزيف معدة حاد، السبب الأشهر هو تآكل جدار المعدة <span class="story-term">Acute gastric erosion</span> (<strong>x7</strong>). وأي مريض جاي بنزيف جهاز هضمي علوي نشط <span class="story-term">Active upper GI bleeding</span>، بعد ما نعلقله المحاليل ونثبت ضغطه، الإجراء التشخيصي والعلاجي الأول هو المنظار العلوي العاجل <span class="story-term">Urgent upper GI endoscopy</span> (<strong>x8</strong>).
+            <br><br>
+            ولقينا شاب عنده مغص وإسهال والتهاب واخد كل طبقات الأمعاء <span class="story-term">Transmural inflammation & skip lesions</span> في آخر الأمعاء الدقيقة <span class="story-term">Terminal ileum</span>، وفي أشعة الباريوم الأمعاء ضيقة شبه الخيط <span class="story-term">String sign of Kantor</span>؛ ده مرض كرون <span class="story-term">Crohn disease</span> (<strong>x6</strong>). أما اللي عنده <span class="story-term">Ulcerative colitis</span> وجاله صفراء وارتفاع في <span class="story-term">ALP & GGT</span> وضيق وتوسع في القنوات المرارية، ده <span class="story-term">Primary sclerosing cholangitis (PSC)</span> (x5).`
+          },
+          {
+            icon: "🧠",
+            heading: "الفصل الرابع: الغدة الكسلانة، مزرعة الخنازير، وعصب الوجه (x7 & x6 & x6)",
+            story: `في العناية المركزة، أي مريض حالته حرجة وسكره عالي <span class="story-term">Critically ill patient with hyperglycemia</span>، بنظبط سكره بمضخة إنسولين وريدي عشان نخلي الرقم بين <span class="story-term">140 to 180 mg/dL</span> (<strong>x7</strong>). ولو مريض دخل في غيبوبة كسل الغدة الدرقية <span class="story-term">Myxedema coma</span> (جسمه متلج، ونبضه بطيء، ونفسه بطيء)، لازم نديله هرمون الغدة وريدي ومعاه كورتيزون مع بعض <span class="story-term">IV levothyroxine AND stress-dose glucocorticoids</span> عشان نحميه من فشل الغدة الكظرية (<strong>x6</strong>).
+            <br><br>
+            وفي عيادة الحميات، فلاح شغال في مزرعة خنازير أو مواشي <span class="story-term">Occupational exposure to livestock / pig farm</span> وجاي بحمى متموجة؛ دي الحمى المالطية <span class="story-term">Brucellosis</span> وبنأكدها بـ <span class="story-term">Brucella serology</span> (<strong>x6</strong>). أما مريض شلل العصب السابع الطرفي <span class="story-term">Bell's palsy</span> فبيقفل نص وشه كله: الجبهة فوق والفم تحت <span class="story-term">Unilateral LMN facial paralysis involving BOTH upper and lower face</span> (<strong>x7</strong>)، وده اللي بيفرقه عن جلطة المخ اللي بتسيب الجبهة سليمة!`
+          }
+        ]
+      },
+      {
+        id: "surgery",
+        title: "3. حدوتة قسم الجراحة",
+        subtitle: "General Surgery (157 Facts)",
+        icon: "fa-kit-medical",
+        color: "from-emerald-500 to-teal-700",
+        maxRepeat: "x11",
+        intro: "في طوارئ الجراحة العامة، الجراح الشاطر بيعرف التشخيص من كلمة سر واحدة! تعال نحفظ أكثر 15 حالة جراحية بتتكرر في الامتحان.",
+        paragraphs: [
+          {
+            icon: "🔪",
+            heading: "الفصل الأول: الثلاثي المرعب في البطن الحادة (x11 & x10 & x9 & x7)",
+            story: `دخلت مريضة بتشتكي من وجع في جنبها اليمين من فوق <span class="story-term">Right upper quadrant pain</span>، ولما الجراح حط إيده وقالها خدي نفس، وقفت النفس من الوجع؛ دي علامة <span class="story-term">Positive Murphy's sign</span> (<strong>x7</strong>)، وعملنا سونار لقينا جدار المرارة تخين وحواليه مية <span class="story-term">Thick-walled gallbladder with pericholecystic fluid on abdominal ultrasound</span>؛ ده التهاب المرارة الحاد <span class="story-term">Acute cholecystitis</span> (اتكرر <strong>11 مرة x11</strong>!).
+            <br><br>
+            أما المريض التاني فجاي بوجع فظيع في فم المعدة بيسمّع في ضهره زي السكينة <span class="story-term">Severe epigastric pain radiating to the back</span>، ولما قسنا إنزيم الأميليز لقيناه أعلى من 3 أضعاف الطبيعي <span class="story-term">Serum amylase > 3 times upper limit of normal</span>؛ ده التهاب البنكرياس الحاد <span class="story-term">Acute pancreatitis</span> (<strong>x10</strong>).
+            <br><br>
+            والمريض التالت شاب وجعه بدأ حوالين السرة ونزل استقر في الجنب اليمين من تحت <span class="story-term">Right iliac fossa pain</span> مع سدّان نفس وترجيع وتحجر لما تلمس بطنه <span class="story-term">Anorexia, vomiting & tenderness with guarding</span>؛ دي الزائدة الدودية <span class="story-term">Acute appendicitis</span> (<strong>x9</strong>). ولو الراجل كبير في السن والوجع في الجنب الشمال من تحت <span class="story-term">Left iliac fossa pain, fever & leukocytosis</span> (كأنها زائدة بس في الشمال!)، ده التهاب جيوب القولون <span class="story-term">Acute diverticulitis</span> (<strong>x7</strong>).
+            <br><br>
+            طيب لو حصوة مرارة كبيرة خرمت المرارة ونزلت سدت الأمعاء الدقيقة <span class="story-term">Gallstone ileus causing small-bowel obstruction</span>؟ الجراح بيدخل يفتح الأمعاء ويطلع الحصوة <span class="story-term">Enterotomy (ileotomy) and stone extraction</span> (<strong>x7</strong>). ولو قرحة معدة انفجرت وعملت بطن متحجرة زي الخشب <span class="story-term">Board-like rigidity</span>، أول أشعة بنطلبها هي أشعة صدر واقف <span class="story-term">Upright chest X-ray</span> عشان نشوف الهواء تحت الحجاب الحاجز (<strong>x5</strong>)، وبنقفل الخرم برقعة من منديل البطن <span class="story-term">Omental patch (Graham patch)</span> (x4).`
+          },
+          {
+            icon: "🩸",
+            heading: "الفصل الثاني: مشاكل الشرج، النزيف السفلي، والساعات الذهبية للخصية (x8 & x8 & x5)",
+            story: `في عيادة الشرج: المريض اللي عنده هرش ودم وكلكوعة بتنزل <span class="story-term">Perianal itching, bleeding & prolapsing lumps</span> دي البواسير <span class="story-term">Hemorrhoids</span> (<strong>x8</strong>). أما اللي بيحس بوجع رهيب زي الموس وقت الحمام وبعده مع تقلص شديد في العضلة <span class="story-term">Severe pain during and after defecation with sphincter spasm</span>، ده الشرخ الشرجي <span class="story-term">Anal fissure</span> (<strong>x5</strong>)، ولو بقى مزمن ومش بيخف بالمراهم بنعمله عملية قطع جزئي للعضلة الداخلية <span class="story-term">Lateral internal sphincterotomy</span> (x2).
+            <br><br>
+            ولو مريض جاي بنزيف شرجي سفلي <span class="story-term">Lower GI bleeding</span>، أول خطوة نثبت ضغطه بالمحاليل، وأول ما يبقى مستقر <span class="story-term">Once hemodynamically stable</span>، الفحص التشخيصي الأول هو منظار القولون <span class="story-term">Colonoscopy</span> (<strong>x8</strong>).
+            <br><br>
+            وفي طوارئ المسالك والجراحة: ولد شاب جاله وجع مفاجئ في الخصية ومفيش <span class="story-term">Absent cremasteric reflex</span>؛ ده التواء الخصية <span class="story-term">Testicular torsion</span>، وإوعى تضيع وقت! لازم استكشاف جراحي وتثبيت <span class="story-term">Urgent surgical exploration and orchiopexy</span> خلال <strong>4 إلى 6 ساعات</strong> <span class="story-term">Within 4-6 hours of symptom onset</span> عشان ننقذ الخصية (<strong>x10 مجموع تكراراته</strong>). وأي فتق متحجر ومؤلم ومابيدخلش جوه <span class="story-term">Irreducible, tender/strangulated hernia</span> لازم عملية فورية <span class="story-term">Urgent surgical intervention</span> (<strong>x6</strong>).`
+          },
+          {
+            icon: "🦴",
+            heading: "الفصل الثالث: الجرح المتأخر، كسر الحوض، والهيبارين السريع (x6 & x6 & x5)",
+            story: `مريض اتعور وساب الجرح مفتوح وجالك المستشفى بعد أكتر من 6 إلى 12 ساعة <span class="story-term">Laceration presenting after > 6-12 hours delay</span>؛ إياك تخيطه غرز أولية عشان مايحبسش الصديد! بننظفه ونسيبه يلم لوحده <span class="story-term">Local wound care and healing by secondary intention</span> (<strong>x6</strong>).
+            <br><br>
+            وفي حوادث العظام: لو مريض اتخبط وعنده كسر في عظام الحوض <span class="story-term">Pelvic fracture involving pubic rami and sacroiliac joint</span>، أكتر حاجة بنخاف تكون اتقطعت معاه هي مجرى البول الغشائي <span class="story-term">Membranous urethral injury</span> (<strong>x9 مجموع تكراراته</strong>). ولو كسر قصبة الرجل <span class="story-term">Tibial fracture</span> فتحناه جراحياً <span class="story-term">Open reduction</span> بيكون احتمال عدم التئام العظم <span class="story-term">Higher incidence of nonunion</span> أعلى بكتير من الرد المغلق (<strong>x5</strong>). أما التواء الركبة مع صوت طرقعة وقفلة <span class="story-term">Knee locking and clicking after flexion and rotation</span> فده قطع الغضروف الهلالي <span class="story-term">Medial meniscus tear</span> (<strong>x5</strong>).
+            <br><br>
+            ومعلومة التخدير والجراحة الذهبية: مريض بياخد هيبارين <span class="story-term">Heparin</span> ومحتاج عملية، هل محتاجين دواء يعكس مفعوله لو نقدر نستنى ساعتين؟ لأ! لأن الهيبارين عمره قصير جداً ومفعوله بيروح لوحده خلال ساعتين لـ 3 ساعات <span class="story-term">Short half-life; resolves within 2-3 hours after discontinuation</span> (<strong>x10 مجموع تكراراته</strong>). لكن لو مريض كبد وعنده سيولة <span class="story-term">Hepatic synthetic dysfunction coagulopathy</span> بنديله بلازما طازجة <span class="story-term">Fresh Frozen Plasma (FFP)</span> وهو نازل العمليات (x4).`
+          }
+        ]
+      },
+      {
+        id: "obgyn",
+        title: "4. حدوتة كشك الولادة والنساء",
+        subtitle: "Obstetrics & Gynecology (169 Facts)",
+        icon: "fa-person-pregnant",
+        color: "from-pink-500 to-rose-600",
+        maxRepeat: "x12",
+        intro: "في قسم النساء والتوليد، الأرقام والخطوات الأولى بتنقذ حياة الأم والبيبي. تعال نحكي حكاية أشهر الأسئلة اللي جت من 5 لـ 12 مرة!",
+        paragraphs: [
+          {
+            icon: "🌸",
+            heading: "الفصل الأول: التوأم الشرير، ألم منتصف الشهر، واللولب (x12 & x8 & x8 & x6)",
+            story: `أول قاعدة ذهبية في عيادة النساء (اتكررت <strong>12 مرة x12</strong>!): بكتيريا السيلان <span class="story-term">Gonorrhea</span> عمرها ما بتمشي لوحدها، دايماً صاحبتها الانتهازية <span class="story-term">Chlamydia</span> ماشية معاها؛ عشان كده أي مريضة تتشخص <span class="story-term">Gonorrhea</span> لازم تتعالج تلقائياً من <span class="story-term">Empirically treated for Chlamydia due to high rate of coinfection</span>!
+            <br><br>
+            دخلت بنوتة قلقانة بتقول: يا دكتور كل شهر في نص الدورة بالظبط (اليوم الـ 14) بيجيلي وجع في جنب الحوض مع نقطتين دم بساط <span class="story-term">Mid-cycle pelvic pain and spotting associated with ovulation</span>؛ طمنّاها وقلنالها ده ألم التبويض الطبيعي واسمه بالألماني <span class="story-term">Mittelschmerz</span> (<strong>x8</strong>).
+            <br><br>
+            أما السيدة اللي مركبة لولب <span class="story-term">IUD in place</span> وجالها التهاب حوض شديد <span class="story-term">Pelvic Inflammatory Disease (PID)</span> (سخونية ووجع مع تحريك عنق الرحم <span class="story-term">Cervical motion tenderness</span>)، الحل في قسم تنظيم الأسرة: نشيل اللولب وندي مضاد حيوي <span class="story-term">Removing the IUD and administering antibiotics</span> (<strong>x8</strong>)، وأي تاريخ مرضي حديث لـ PID يمنع تركيب اللولب <span class="story-term">Contraindication to IUD insertion</span> (x5).
+            <br><br>
+            ولو بنوتة عندها تكيس مبايض <span class="story-term">Polycystic Ovary Syndrome (PCOS)</span> وبتشتكي من لخبطة الدورة وشعر زيادة في الوجه <span class="story-term">Hirsutism</span> (شعر خشن بدون تضخم صوت أو علامات ذكورة <span class="story-term">Without signs of virilization</span> x6)، خط العلاج الأول هو حبوب منع الحمل المركبة <span class="story-term">Combined Oral Contraceptives (COCs)</span> (<strong>x6</strong>).`
+          },
+          {
+            icon: "🤰",
+            heading: "الفصل الثاني: سكر الحمل، هرش الكبد، والأسبوع 34، والماغنسيوم (x7 & x7 & x7 & x6)",
+            story: `في عيادة متابعة الحمل: سيدة حامل بتشتكي من التهابات فطرية متكررة وسكر في البول <span class="story-term">Persistent vaginal candidiasis and glucosuria</span>؛ دي علامة إنذار لازم نعملها فوراً فحص سكر الحمل <span class="story-term">Screening for Gestational Diabetes Mellitus (GDM)</span> (<strong>x7</strong>). ولما نشخص سكر الحمل، إيه أول خطوة في العلاج؟ مش إنسولين فوراً، بل تظبيط الأكل والرياضة <span class="story-term">Lifestyle modifications: dietary changes and exercise</span> (<strong>x7</strong>)!
+            <br><br>
+            ودخلت حامل تانية بتهرش في جسمها كله خصوصاً بالليل ومفيش أي طفح جلدي <span class="story-term">Generalized pruritus in the absence of a rash</span>، وتحاليلها فيها ارتفاع في أحماض الصفراء وإنزيمات الكبد <span class="story-term">Elevated serum bile acids & abnormal LFTs</span>؛ ده ركود الصفراء في الحمل <span class="story-term">Intrahepatic cholestasis of pregnancy</span> (<strong>x6</strong>)، ولازم ننبهها إنه بيحب يرجع تاني في الحمل اللي بعده بنسبة عالية جداً <span class="story-term">High rate of recurrence in subsequent pregnancies</span> (<strong>x7</strong>).
+            <br><br>
+            وسؤال الأسبوع السحري: سيدة حامل وعندها متلازمة الأجسام المضادة للفوسفوليبيد مع تسمم حمل <span class="story-term">History of Antiphospholipid Syndrome (APS) and preeclampsia</span>، بنولدها إمتى؟ عند الأسبوع الـ 34 بالظبط <span class="story-term">Delivery at 34 weeks of gestation</span> (<strong>x7</strong>)!
+            <br><br>
+            ولو الحامل ضغطها عالي جداً وعندها تسمم حمل شديد <span class="story-term">Severe preeclampsia</span>، الحارس الأمين اللي بيحمي مخها من التشنجات هو كبريتات الماغنسيوم وريدياً <span class="story-term">Intravenous Magnesium Sulfate for seizure prophylaxis</span> (<strong>x11 مجموع تكراراته</strong>). ولو لا قدر الله دخلت في تشنج فعلي <span class="story-term">Eclamptic seizure</span>، أول حاجة تعملها في أول ثانية هي حماية المريضة ومنعها من إيذاء نفسها <span class="story-term">Ensure patient safety and prevent self-injury</span> (<strong>x6</strong>).`
+          },
+          {
+            icon: "👶",
+            heading: "الفصل الثالث: كشك الولادة والتمزقات والمشيمة (x9 & x7 & x5 & x5)",
+            story: `في كشك الولادة: سيدة حامل في الشهور الأخيرة نامت على ضهرها فجأة ضغطها وطي ونبض الجنين قل؛ لأن الرحم التقيل ضغط على الوريد الأجوف السفلي <span class="story-term">Supine hypotensive syndrome due to compression of the Inferior Vena Cava (IVC)</span> (<strong>x5</strong>) وبنحلها بأننا ننيّمها على جنبها الشمال.
+            <br><br>
+            ولو الجنين جاي بالعرض <span class="story-term">Transverse lie</span> أو بوجهه ودقنه لورا <span class="story-term">Mentoposterior position</span>، مستحيل يولد طبيعي ولازم قيصرية <span class="story-term">Cesarean delivery</span> (<strong>x7</strong>).
+            <br><br>
+            وبعد الولادة الطبيعية، الدكتور فحص جرح العجان لقاه واصل لعضلات العجان بس عضلة الشرج سليمة تماماً <span class="story-term">Involves perineal body muscles BUT NOT the anal sphincter</span>؛ ده تمزق من الدرجة التانية <span class="story-term">Second-degree perineal laceration</span> (اتكرر <strong>9 مرات x9</strong>!).
+            <br><br>
+            وأخيراً: لو مشيمة انفصلت بدري <span class="story-term">Placental abruption</span> (نزيف مؤلم ورحم متحجر) والدم دخل جوه عضلة الرحم خلاها زرقاء، ده اسمه رحم كوفلير <span class="story-term">Couvelaire uterus (intramyometrial bleeding)</span> (<strong>x5</strong>). وأي نزيف بعد سن انقطاع الطمث <span class="story-term">Postmenopausal vaginal bleeding</span> هو جرس إنذار أحمر لازم ناخد عينة من بطانة الرحم <span class="story-term">Endometrial biopsy to exclude carcinoma</span> (<strong>x9 مجموع تكراراته</strong>).`
+          }
+        ]
+      },
+      {
+        id: "er",
+        title: "5. حدوتة الطوارئ والإنعاش",
+        subtitle: "Emergency Medicine (40 Facts)",
+        icon: "fa-truck-medical",
+        color: "from-amber-500 to-orange-600",
+        maxRepeat: "x6",
+        intro: "في قسم الطوارئ كل ثانية بحياة! عندنا 40 معلومة مركزة جداً في الملف، تعال نحفظهم في قصة إنقاذ واحدة سريعة.",
+        paragraphs: [
+          {
+            icon: "🚑",
+            heading: "الفصل الأول: مجرى الهواء والرقبة والصدر (x6 & x6 & x5 & x4)",
+            story: `وصل مصاب حادثة لقسم الطوارئ، إيه الأولوية رقم 1 في الـ <span class="story-term">Primary survey in trauma management</span>؟ تأمين مجرى الهواء مع تثبيت فقرات الرقبة، وبعدها فوراً علاج إصابات الصدر القاتلة زي استرواح الصدر الضاغط <span class="story-term">Airway maintenance with cervical spine stabilization, followed by tension pneumothorax</span> (<strong>x6</strong>). وإزاي بنفتح مجرى الهواء لو شاكين في كسر فقرات الرقبة؟ بحركة دفع الفك بدون تحريك الرقبة <span class="story-term">Modified jaw-thrust maneuver</span> (<strong>x4</strong>).
+            <br><br>
+            طيب لو المريض مجرى الهواء العلوي مسدود، وحاولنا نركب أنبوبة حنجرية وفشلنا، وحاولنا ننفخ بالماسك وفشلنا <span class="story-term">When endotracheal intubation and bag-mask ventilation are unsuccessful</span>؟ بنفتح فوراً فتحة جراحية في الغشاء الحلقي الدرقي في الرقبة <span class="story-term">Cricothyrotomy</span> (<strong>x6</strong>)!
+            <br><br>
+            ولو المريض عنده هواء في البللورا وعامله أعراض <span class="story-term">Symptomatic pneumothorax</span>، علاجه تركيب أنبوبة صدرية <span class="story-term">Tube thoracostomy</span> (<strong>x5</strong>). أما لو حادثة صدر بسيطة وعنده كسر ضلع مستقر من غير استرواح هوائي أو دموي <span class="story-term">Stable blunt chest trauma with isolated rib fractures</span>، بنديله أكسجين ومسكنات ألم قوية بس من غير أنبوبة صدرية <span class="story-term">Supplemental oxygen and analgesia</span> (<strong>x4</strong>).
+            <br><br>
+            وقبل ما المصاب يوصل المستشفى وهو ضغطه واطي <span class="story-term">Prehospital fluid resuscitation in hypotensive trauma</span>، هدفنا مش رقم ضغط عالي ينزف بيه، هدفنا بس نحس نبض مركزي <span class="story-term">Maintain a palpable central pulse</span> (<strong>x4</strong>). وأول ما نخلص الـ Primary survey، نشيل لوح الظهر الصلب فوراً <span class="story-term">Remove spinal immobilization board as soon as primary survey is completed</span> عشان مايعملش قرح فراش أو يضايق النفس (x3).`
+          },
+          {
+            icon: "🧪",
+            heading: "الفصل الثاني: المبيد الحشري، جلطة الرئة، وشظية العين (x5 & x4 & x4)",
+            story: `في ركن السموم: جابوا مزارع رش مبيد حشري <span class="story-term">Organophosphate poisoning</span> وعنده إفرازات غزيرة في الرئة ودموع وعرق وحدقة عين ضيقة؛ الترياق المنقذ هو <span class="story-term">Atropine</span>، وبنفضل نديه لحد إمتى؟ مش لحد ما الحدقة توسع، بل لحد ما إفرازات الشعب الهوائية تنشف تماماً <span class="story-term">Therapeutic endpoint is drying of bronchial secretions</span> (<strong>x5</strong>)! أما ضربة الشمس <span class="story-term">Heat stroke</span> فبنبرده فوراً بخلع الملابس والمراوح ورش المياه <span class="story-term">Immediate aggressive evaporative cooling</span> (<strong>x4</strong>).
+            <br><br>
+            وفي ركن القلب والرئة: مريض شاكين بقوة إن عنده جلطة في شريان الرئة <span class="story-term">Suspected Pulmonary Embolism (PE)</span> وضغطه مستقر <span class="story-term">Hemodynamically stable</span>؛ هل نستنى الأشعة المقطعية ولا ندي سيولة الأول؟ بندي سيولة فوراً (مثل الهيبارين الوريدي) وإحنا بنجهز للأشعة المقطعية <span class="story-term">Immediate anticoagulation (e.g., IV heparin) while arranging confirmatory CT pulmonary angiography</span> (<strong>x8 مجموع تكراراته في الطوارئ والباطنة</strong>)!
+            <br><br>
+            ولو حداد دخلت شظية حديد جوه عينه <span class="story-term">Metallic intraocular foreign body</span>، إوعى تقرب من الرنين المغناطيسي عشان مايحركش الحديدة ويعمي العين! الفحص الأفضل والأكثر أماناً هو الأشعة المقطعية <span class="story-term">CT scan of the orbit</span> (<strong>x4</strong>). أما لو مريض جاله وجع مفاجئ شديد في العين مع فقدان بصر <span class="story-term">Sudden, painful vision loss</span>، دي المياه الزرقاء الحادة <span class="story-term">Acute angle-closure glaucoma</span> (<strong>x4</strong>).`
+          }
+        ]
+      },
+      {
+        id: "ethics",
+        title: "6. حدوتة الأخلاقيات وسلامة المرضى",
+        subtitle: "Ethics & Patient Safety (28 Facts)",
+        icon: "fa-scale-balanced",
+        color: "from-purple-600 to-indigo-700",
+        maxRepeat: "x8",
+        intro: "أسئلة الأخلاقيات وسلامة المرضى مضمونة 100% في الامتحان لأنها قصيرة ومباشرة جداً. احفظ هذه القواعد الـ 8 ولن تغلط في أي سؤال منها!",
+        paragraphs: [
+          {
+            icon: "⚖️",
+            heading: "الفصل الأول: استقلالية المريض وسر التشخيص (x8 & x5 & x4)",
+            story: `أهم قانون في أخلاقيات الطب (اتكرر <strong>8 مرات x8</strong>!): لو مريض بالغ وعاقل وواعي <span class="story-term">Competent adult patient</span> رفض علاج حتى لو العلاج ده هينقذ حياته <span class="story-term">Refuses life-saving medical treatment</span>، من حقه الكامل يرفض بناءً على مبدأ الاستقلالية <span class="story-term">Principle of Autonomy</span>!
+            <br><br>
+            طيب لو المريض طلع عنده مرض خطير (زي السرطان)، وأهله جم قالولك: "أرجوك يا دكتور ماتقولوش عشان مايتصدمش!" <span class="story-term">Family requests serious diagnosis be withheld</span>؛ تعمل إيه؟ واجبك الأخلاقي هو سؤال المريض نفسه أولاً عن رغبته في معرفة التفاصيل ومين من أهله يحب يشركه في النقاش <span class="story-term">First determine the patient's preferences regarding disclosure of information and involvement of family members</span> (<strong>x9 مجموع تكراراته</strong>).
+            <br><br>
+            وسرية معلومات المريض <span class="story-term">Patient confidentiality</span> مقدسة: ممنوع تقول نتيجة تحاليل مريض بالغ لأي طرف تالت حتى لو كان الزوج أو الزوجة <span class="story-term">Withhold from third parties, including spouses</span> إلا بموافقة المريض، ولكن يجوز كسر السرية قانونياً لو صدر أمر من المحكمة <span class="story-term">Legally breached when mandated by a court order</span> (x2). كما يسمح العرف الطبي بعلاج الزملاء الأطباء بدون أخذ أتعاب <span class="story-term">Provide medical care to colleagues without charging fees</span> (<strong>x4</strong>)، ويجب التبليغ عن الطبيب المخمور أو غير المؤهل لحماية المرضى <span class="story-term">Report impaired colleagues to appropriate authority</span> (x2).`
+          },
+          {
+            icon: "🧼",
+            heading: "الفصل الثاني: وقفة غرفة العمليات، غسيل اليدين، والفوطة المفقودة (x6 & x6 & x6)",
+            story: `في قسم سلامة المرضى <span class="story-term">Patient Safety</span>، عندنا ثلاثية اتكررت كل واحدة منها <strong>6 مرات (x6)</strong>:
+            <br><br>
+            1️⃣ قبل ما الجراح يمسك المشرط، لازم كل الفريق يقف وقفة التأكد <span class="story-term">Surgical Time-Out</span> (<strong>x6</strong>): للتأكد من 3 حاجات: المريض الصح، والمكان الصح، والعملية الصح <span class="story-term">Verify correct patient, site, and procedure</span>.
+            <br><br>
+            2️⃣ لو وهم بيعدوا الفوط أو الآلات الجراحية لقوا آلة أو فوطة ناقصة ومش لاقيينها <span class="story-term">Missing surgical item cannot be located</span> (<strong>x6</strong>): البروتوكول القياسي هو إبلاغ مشرف العمليات، وتوثيق الواقعة، والاحتفاظ بصور الأشعة <span class="story-term">Notify operating room supervisor, document the incident, and retain imaging records</span>.
+            <br><br>
+            3️⃣ إيه هي الخطوة الواحدة الأكثر فاعلية لمنع عدوى المستشفيات <span class="story-term">Single most effective measure for preventing healthcare-associated infections (HAIs)</span>؟ غسيل اليدين <span class="story-term">Hand hygiene</span> (<strong>x6</strong>)! لو الإيد متسخة ظاهرياً <span class="story-term">Visibly soiled hands</span> لازم مية وصابون، أما لو مش متسخة ظاهرياً فالكحول كافي (x2). وأشهر بكتيريا بتعمل عدوى في العناية المركزة هي البكتيريا سالبة الجرام <span class="story-term">Gram-negative bacteria</span> (<strong>x4</strong>)، ولتطهير الأسطح من أبواغ <span class="story-term">Clostridium difficile spores</span> بنستعمل كلور مخفف <span class="story-term">1:10 diluted bleach solution</span> (x2).`
+          }
+        ]
+      }
+    ];
+
+    // ==========================================
+    // 3. COMPLETE HIGH-YIELD FLASHCARDS & MCQ DATABASE (75 Items)
+    // ==========================================
+    const HIGH_YIELD_DB = [
+      // --- PEDIATRICS (22 Items) ---
+      {
+        id: "ped_1",
+        specialty: "Pediatrics",
+        subtopic: "Gastroenterology",
+        repeats: 17,
+        vignette: "A 10-month-old infant presents to the emergency department with severe watery diarrhea, lethargy, sunken eyes, poor skin turgor, and delayed capillary refill (4 seconds). What is the most appropriate initial fluid management?",
+        options: [
+          "Rapid IV resuscitation with a 20 mL/kg bolus of isotonic saline",
+          "Oral rehydration therapy (ORT) via small frequent sips",
+          "IV 5% Dextrose in 0.45% half-normal saline over 24 hours",
+          "IV 10 mL/kg bolus of hypertonic 3% saline"
+        ],
+        correct: 0,
+        keyFact: "The initial management of severe pediatric dehydration involves rapid intravenous resuscitation with a 20 mL/kg bolus of isotonic saline.",
+        arabicTip: "أعلى سؤال تكراراً في الملف كله (x17)! أول ما تشوف جفاف شديد في طفل (Severe dehydration / shock) اديله فوراً 20 mL/kg bolus of Isotonic Saline (0.9% NaCl)."
+      },
+      {
+        id: "ped_2",
+        specialty: "Pediatrics",
+        subtopic: "Respiratory Diseases",
+        repeats: 15,
+        vignette: "A 6-month-old infant presents in winter with a 2-day history of rhinorrhea and low-grade fever followed by tachypnea, intercostal retractions, and diffuse expiratory wheezing. Chest X-ray shows hyperinflation. What is the most common causative pathogen and primary management?",
+        options: [
+          "Respiratory syncytial virus (RSV); supportive care with airway suctioning and hydration",
+          "Streptococcus pneumoniae; high-dose oral amoxicillin",
+          "Parainfluenza virus; nebulized epinephrine and dexamethasone",
+          "Haemophilus influenzae type b; endotracheal intubation in the OR"
+        ],
+        correct: 0,
+        keyFact: "Respiratory syncytial virus (RSV) is the most common cause of bronchiolitis in infants (<2 years), presenting with wheezing and respiratory distress. Management is primarily supportive (airway clearance via suctioning, hydration, and supplemental oxygen if hypoxic).",
+        arabicTip: "اتكرر 15 مرة (x15)! رضيع أقل من سنتين عنده برد وبعدين تزييق (Wheezing) = Bronchiolitis بسبب فيروس RSV، وعلاجه Supportive فقط (شفط إفرازات + سوائل + أكسجين لو محتاج)."
+      },
+      {
+        id: "ped_3",
+        specialty: "Pediatrics",
+        subtopic: "Cardiovascular System",
+        repeats: 10,
+        vignette: "A 4-month-old infant born prematurely is evaluated for poor weight gain. Cardiac auscultation reveals a loud, continuous machinery-like murmur best heard at the second left intercostal space (infraclavicular area). What is the most likely diagnosis?",
+        options: [
+          "Patent ductus arteriosus (PDA)",
+          "Atrial septal defect (ASD)",
+          "Tetralogy of Fallot (TOF)",
+          "Coarctation of the aorta"
+        ],
+        correct: 0,
+        keyFact: "Persistent (Patent) ductus arteriosus presents as a continuous machinery-like murmur heard over the precordium (loudest at the second left intercostal space).",
+        arabicTip: "اتكرر 10 مرات (x10)! أول ما تقرأ كلمة (Continuous machinery-like murmur) تحت الترقوة الشمال = Patent Ductus Arteriosus (PDA) فوراً."
+      },
+      {
+        id: "ped_4",
+        specialty: "Pediatrics",
+        subtopic: "Nephrology",
+        repeats: 10,
+        vignette: "A 4-year-old boy presents with periorbital edema that progresses to generalized edema and ascites. Urinalysis shows 4+ proteinuria without RBC casts, serum albumin is 1.9 g/dL, and blood pressure is normal. What is the most likely diagnosis and first-line treatment?",
+        options: [
+          "Minimal change disease; oral corticosteroids",
+          "Post-streptococcal glomerulonephritis; penicillin and supportive care",
+          "Focal segmental glomerulosclerosis; immediate cyclophosphamide",
+          "IgA nephropathy; ACE inhibitors alone"
+        ],
+        correct: 0,
+        keyFact: "Minimal change disease is the most common cause of nephrotic syndrome in children and is initially treated with oral corticosteroids. Hypertension is not a constant feature.",
+        arabicTip: "اتكرر 10 مرات (x10)! أشهر سبب لـ Nephrotic syndrome في الأطفال هو Minimal change disease وعلاجه الأول هو الكورتيزون بالفم (Oral corticosteroids)."
+      },
+      {
+        id: "ped_5",
+        specialty: "Pediatrics",
+        subtopic: "Respiratory Diseases",
+        repeats: 10,
+        vignette: "A 2-year-old toddler develops sudden coughing and respiratory distress while playing on the floor. Physical examination reveals unilateral wheezing and diminished air entry on the right side. Chest X-ray shows unilateral hyperinflation. What is the most appropriate next step?",
+        options: [
+          "Urgent diagnostic and therapeutic bronchoscopy",
+          "Nebulized salbutamol and oral prednisolone",
+          "Immediate needle thoracocentesis",
+          "CT scan of the chest with intravenous contrast"
+        ],
+        correct: 0,
+        keyFact: "Unilateral hyperinflation on chest X-ray with diminished air entry and wheezes localized to one side in a young child suggests foreign body aspiration requiring urgent bronchoscopy.",
+        arabicTip: "اتكرر 10 مرات (x10)! طفل فجأة شرَق وعنده تزييق أو نقص دخول الهواء في ناحية واحدة (Unilateral wheezing / hyperinflation) = بلع جسم غريب (Foreign body aspiration) والحل منظار شعبي عاجل (Bronchoscopy)."
+      },
+      {
+        id: "ped_6",
+        specialty: "Pediatrics",
+        subtopic: "Pediatric Surgery / GI",
+        repeats: 9,
+        vignette: "An 8-month-old infant presents with episodic, severe colicky abdominal pain during which he draws his legs up to his abdomen, followed by lethargy and passage of redcurrant-jelly stools. Abdominal ultrasound demonstrates a 'target sign'. What is the first-line diagnostic and therapeutic procedure?",
+        options: [
+          "Air or contrast enema",
+          "Immediate exploratory laparotomy and bowel resection",
+          "Upper GI series with barium swallow",
+          "Rectal suction biopsy"
+        ],
+        correct: 0,
+        keyFact: "Intussusception in infants presents with intermittent colicky abdominal pain, drawing up of the legs, lethargy, palpable sausage mass, currant-jelly stools, and a target sign on ultrasound. Air or contrast enema is both diagnostic and therapeutic.",
+        arabicTip: "اتكرر 9 مرات (x9) في الجراحة و5 في الدم و3 في الجهاز الهضمي! (Currant-jelly stools + Target sign + Drawing up legs) = Intussusception، والعلاج والتشخيص هو حقنة الهواء أو الصبغة الشرجية (Air or contrast enema)."
+      },
+      {
+        id: "ped_7",
+        specialty: "Pediatrics",
+        subtopic: "Hematology / Nephrology",
+        repeats: 9,
+        vignette: "A 7-year-old boy presents with cola-colored urine, mild facial puffiness, and hypertension 2 weeks after recovering from a sore throat. Urinalysis reveals dysmorphic RBCs and red cell casts. Which laboratory finding is most characteristic of this condition?",
+        options: [
+          "Low serum C3 complement levels",
+          "Elevated tissue transglutaminase IgA antibodies",
+          "Markedly decreased serum albumin (< 2.0 g/dL) with normal C3",
+          "Positive direct Coombs test"
+        ],
+        correct: 0,
+        keyFact: "Post-streptococcal glomerulonephritis (PSGN) manifests weeks after streptococcal pharyngitis with hematuria, red cell casts, hypertension, and low serum C3 levels due to immune complex-mediated complement consumption.",
+        arabicTip: "اتكرر 9 مرات (x9)! بول مدمم وRBC casts بعد التهاب الحلق بأسبوعين = PSGN، وكلمة السر في التحاليل هي استهلاك المكمل الثالث (Low serum C3 levels)."
+      },
+      {
+        id: "ped_8",
+        specialty: "Pediatrics",
+        subtopic: "Hematology / Nutrition",
+        repeats: 9,
+        vignette: "A 14-month-old child presents with pallor and pica. He has been exclusively breastfed since birth without solid foods or vitamin/mineral drops (or drinks 1.5 liters of unmodified cow's milk daily). CBC shows microcytic hypochromic anemia with elevated RDW. Which test is most sensitive and specific to confirm the diagnosis?",
+        options: [
+          "Serum ferritin level",
+          "Hemoglobin electrophoresis",
+          "Bone marrow aspiration",
+          "Direct antiglobulin (Coombs) test"
+        ],
+        correct: 0,
+        keyFact: "Prolonged exclusive breastfeeding (>6 months) without iron supplementation or excessive cow's milk intake in toddlers causes iron deficiency anemia (microcytic hypochromic, high RDW, normal Hb electrophoresis). Serum ferritin is the most sensitive and specific diagnostic test.",
+        arabicTip: "اتكرر 9 مرات (x9)! رضاعة طبيعية فقط بدون إدخال حديد بعد 6 شهور أو شرب لبن بقري بكميات كبيرة = Iron deficiency anemia، وأدق تحليل لتشخيصها هو Serum ferritin."
+      },
+      {
+        id: "ped_9",
+        specialty: "Pediatrics",
+        subtopic: "Gastroenterology",
+        repeats: 8,
+        vignette: "A 3-year-old girl presents with chronic diarrhea, abdominal distension, irritability, and failure to thrive that began several months after introducing wheat-based cereals. Which serological test is the best initial screening tool for her condition?",
+        options: [
+          "Tissue transglutaminase (tTG) IgA antibodies",
+          "Sweat chloride test",
+          "Stool examination for ova and parasites",
+          "Anti-mitochondrial antibodies (AMA)"
+        ],
+        correct: 0,
+        keyFact: "Celiac disease is characterized by malabsorption, failure to thrive, and the presence of tissue transglutaminase (tTG) antibodies.",
+        arabicTip: "اتكرر 8 مرات (x8)! طفل وزنه مش بيزيد وإسهال مزمن مع القمح (Celiac disease) = الأجسام المضادة هي Tissue transglutaminase antibodies."
+      },
+      {
+        id: "ped_10",
+        specialty: "Pediatrics",
+        subtopic: "Neonatology",
+        repeats: 8,
+        vignette: "A full-term newborn is delivered vaginally to a mother who tested positive for Hepatitis B surface antigen (HBsAg) during pregnancy. What is the most appropriate post-exposure prophylaxis for the neonate?",
+        options: [
+          "Administer both Hepatitis B vaccine and Hepatitis B immunoglobulin (HBIG) within 12 hours of birth",
+          "Administer Hepatitis B vaccine alone at birth and delay HBIG until 1 month",
+          "Perform cesarean delivery and avoid breastfeeding",
+          "Wait to test the infant's HBsAg at 6 months of age before vaccinating"
+        ],
+        correct: 0,
+        keyFact: "Infants born to mothers with acute hepatitis B infection (HBsAg-positive) require both the hepatitis B vaccine and hepatitis B immunoglobulin (HBIG) at birth (within 12 hours) to prevent vertical transmission.",
+        arabicTip: "اتكرر 8 مرات في الأطفال و2 في النساء (x10)! مولود لأم عندها فيروس B إيجابي لازم ياخد الاتنين مع بعض عند الولادة: HBV Vaccine + HBIG في فخذين مختلفين."
+      },
+      {
+        id: "ped_11",
+        specialty: "Pediatrics",
+        subtopic: "Behavioural Problems",
+        repeats: 8,
+        vignette: "A 3-year-old boy is brought by his parents because he does not make eye contact, does not respond to his name, lines up his toy cars repetitively for hours, and becomes severely distressed by minor changes in daily routine. What is the most likely diagnosis?",
+        options: [
+          "Autism spectrum disorder (ASD)",
+          "Attention-deficit/hyperactivity disorder (ADHD)",
+          "Rett syndrome",
+          "Selective mutism"
+        ],
+        correct: 0,
+        keyFact: "Autism spectrum disorder is characterized by persistent deficits in social communication and social interaction across multiple contexts, alongside restricted, repetitive patterns of behavior, interests, or activities.",
+        arabicTip: "اتكرر 8 مرات (x8)! ضعف التواصل الاجتماعي وعدم التواصل البصري مع حركات تكرارية نمطية = Autism spectrum disorder. أما ADHD فشرطه الأساسي وجود الأعراض في مكانين مختلفين على الأقل (at least two settings x3)."
+      },
+      {
+        id: "ped_12",
+        specialty: "Pediatrics",
+        subtopic: "Respiratory Diseases",
+        repeats: 8,
+        vignette: "A 9-year-old child with persistent bronchial asthma is currently maintained on low-dose inhaled corticosteroids (ICS) and as-needed salbutamol, but continues to experience frequent nocturnal wheezing and daytime symptoms. Good inhaler technique and adherence are confirmed. What is the most appropriate next step in management?",
+        options: [
+          "Add a long-acting beta-2 agonist (LABA) to the low-dose inhaled corticosteroid",
+          "Quadruple the dose of the inhaled corticosteroid immediately",
+          "Start daily oral prednisolone maintenance therapy",
+          "Switch from inhaled corticosteroid to a short-acting muscarinic antagonist alone"
+        ],
+        correct: 0,
+        keyFact: "In a child with asthma already on low-dose inhaled corticosteroids with poor control, the next step is to add a long-acting beta-2 agonist (LABA) rather than increasing the corticosteroid dose.",
+        arabicTip: "اتكرر 8 مرات (x8)! طفل ماشي على Low-dose ICS ولسه الربو مش منضبط، الخطوة الجاية هي إضافة LABA (Add a long-acting beta-2 agonist) وليس زيادة جرعة الكورتيزون."
+      },
+      {
+        id: "ped_13",
+        specialty: "Pediatrics",
+        subtopic: "Respiratory / Emergencies",
+        repeats: 7,
+        vignette: "A 4-year-old unimmunized child presents with sudden onset high fever, severe sore throat, drooling, muffled 'hot potato' voice, inspiratory stridor, and sitting upright leaning forward on outstretched hands (tripod posture). What is the immediate priority in management?",
+        options: [
+          "Immediate airway securing via endotracheal intubation in the operating room plus IV antibiotics",
+          "Immediate throat examination using a tongue depressor in the triage room",
+          "Oral amoxicillin and discharge home with antipyretics",
+          "Chest physiotherapy and postural drainage"
+        ],
+        correct: 0,
+        keyFact: "Epiglottitis presents with high fever, drooling, tripod posture, muffled voice, and inspiratory stridor and requires immediate airway management via intubation in the operating room plus intravenous antibiotics.",
+        arabicTip: "اتكرر 7 مرات في الصدر و5 في العدوى (x12)! طفل سخن وبيريل وقاعد Tripod posture وصوته مكتوم = Epiglottitis، الأولوية القصوى هي تأمين مجرى الهواء بأنبوبة في غرفة العمليات (Intubation in OR)."
+      },
+      {
+        id: "ped_14",
+        specialty: "Pediatrics",
+        subtopic: "Respiratory Diseases",
+        repeats: 7,
+        vignette: "A 6-year-old boy presents with high fever, tachypnea, cough, and acute right-sided abdominal pain mimicking acute appendicitis. Abdominal palpation shows mild voluntary guarding without rebound tenderness. What is the most appropriate initial diagnostic imaging?",
+        options: [
+          "Chest X-ray (to evaluate for right lower lobe pneumonia)",
+          "Emergency exploratory laparotomy",
+          "Diagnostic peritoneal lavage",
+          "MRCP of the biliary tree"
+        ],
+        correct: 0,
+        keyFact: "Right lower lobe pneumonia in a child can mimic acute abdomen and is initially evaluated with a chest X-ray.",
+        arabicTip: "اتكرر 7 مرات (x7)! التهاب الفص السفلي الأيمن للرئة (Right lower lobe pneumonia) في الأطفال بيقلد البطن الحادة (Acute abdomen) وبنكشفه بـ Chest X-ray."
+      },
+      {
+        id: "ped_15",
+        specialty: "Pediatrics",
+        subtopic: "Hematology",
+        repeats: 7,
+        vignette: "A healthy-appearing 4-year-old girl presents with sudden onset generalized petechiae and mild bruising 2 weeks after an upper respiratory viral illness. She has no hepatosplenomegaly or lymphadenopathy. CBC shows platelets of 28,000/mm³ with normal Hb and WBC count. What is the most appropriate management?",
+        options: [
+          "Observation and parental reassurance",
+          "Immediate emergency splenectomy",
+          "Prophylactic platelet transfusion every 48 hours",
+          "Combination chemotherapy"
+        ],
+        correct: 0,
+        keyFact: "Immune thrombocytopenic purpura (ITP) in children typically presents with isolated thrombocytopenia (petechiae/bruising) 2-3 weeks following a viral infection and is managed with observation in mild cases.",
+        arabicTip: "اتكرر 7 مرات (x7)! طفل شكله سليم تماماً وعنده نقص صفائح منفرد بعد دور برد بـ 2-3 أسابيع = ITP، وفي الحالات البسيطة بدون نزيف خطير العلاج هو Observation فقط!"
+      },
+      {
+        id: "ped_16",
+        specialty: "Pediatrics",
+        subtopic: "Gastroenterology / Surgery",
+        repeats: 6,
+        vignette: "A 4-week-old male infant presents with forceful, non-bilious projectile vomiting immediately after every feed, after which he remains hungry. Examination reveals a palpable olive-shaped mass in the right upper quadrant. What electrolyte and acid-base abnormality is characteristically seen?",
+        options: [
+          "Hypochloremic, hypokalemic metabolic alkalosis",
+          "Hyperchloremic, hyperkalemic metabolic acidosis",
+          "High-anion gap metabolic acidosis",
+          "Uncompensated respiratory acidosis"
+        ],
+        correct: 0,
+        keyFact: "Congenital hypertrophic pyloric stenosis presents at 2-8 weeks of age with non-bilious projectile vomiting and a palpable olive-shaped abdominal mass, leading to hypochloremic, hypokalemic metabolic alkalosis.",
+        arabicTip: "اتكرر 6 مرات في الجهاز الهضمي و3 في الطوارئ و2 في الجراحة (x11)! ترجيع نافورة غير صفراوي + زيتونة في البطن = Pyloric stenosis، وبيعمل Hypochloremic hypokalemic metabolic alkalosis."
+      },
+      {
+        id: "ped_17",
+        specialty: "Pediatrics",
+        subtopic: "Infections",
+        repeats: 6,
+        vignette: "A 3-year-old boy presents with a 6-day history of high unremitting fever, bilateral non-exudative conjunctivitis, strawberry tongue, cracked lips, polymorphous rash, edema of the hands and feet, and unilateral cervical lymphadenopathy. What is the most effective treatment to prevent coronary artery aneurysms?",
+        options: [
+          "Intravenous immunoglobulin (IVIG) plus aspirin",
+          "Intravenous benzathine penicillin G",
+          "Oral amoxicillin-clavulanate for 10 days",
+          "High-dose intravenous cyclophosphamide"
+        ],
+        correct: 0,
+        keyFact: "Kawasaki disease is treated with intravenous immunoglobulin (IVIG), which is the most effective therapy to prevent coronary artery aneurysms.",
+        arabicTip: "اتكرر 6 مرات (x6)! سخونية > 5 أيام مع عين حمراء ولسان فراولة وتورم اليدين = Kawasaki disease، والعلاج الأساسي لمنع تمدد الشرايين التاجية هو IVIG."
+      },
+      {
+        id: "ped_18",
+        specialty: "Pediatrics",
+        subtopic: "Emergencies / Respiratory",
+        repeats: 6,
+        vignette: "A 20-month-old child wakes up at night with a harsh barking cough, hoarseness, and inspiratory stridor at rest. Anteroposterior neck X-ray reveals subglottic narrowing ('steeple sign'). What is the best immediate treatment?",
+        options: [
+          "Nebulized epinephrine and corticosteroids (dexamethasone)",
+          "Intravenous vancomycin and immediate cricothyrotomy",
+          "Oral azithromycin and chest physiotherapy",
+          "Inhaled salbutamol and ipratropium bromide"
+        ],
+        correct: 0,
+        keyFact: "Croup (laryngotracheobronchitis) is characterized by a barking cough and inspiratory stridor with a steeple sign on neck X-ray and is managed with nebulized epinephrine and corticosteroids (dexamethasone).",
+        arabicTip: "اتكرر 6 مرات في الطوارئ و6 في الصدر (x12)! كحة نباحية (Barking cough) + Steeple sign = Croup، وعلاجه Dexamethasone + Nebulized Epinephrine."
+      },
+      {
+        id: "ped_19",
+        specialty: "Pediatrics",
+        subtopic: "Neonatology",
+        repeats: 6,
+        vignette: "During delivery-room resuscitation of a newborn infant who remains bradycardic (heart rate < 60 bpm) despite effective positive-pressure ventilation, chest compressions are initiated. What is the standard chest compression to ventilation ratio in neonatal resuscitation?",
+        options: [
+          "3:1 (3 compressions to 1 ventilation)",
+          "30:2 (30 compressions to 2 ventilations)",
+          "15:2 (15 compressions to 2 ventilations)",
+          "5:1 (5 compressions to 1 ventilation)"
+        ],
+        correct: 0,
+        keyFact: "In neonatal resuscitation, the standard chest compression to ventilation ratio is 3:1. The most sensitive indicator of successful neonatal resuscitation is an increase in heart rate.",
+        arabicTip: "اتكرر 6 مرات (x6)! نسبة الضغطات للتنفس في إنعاش حديثي الولادة هي 3:1، وأول خطوة لمولود جديد هي التنشيف والتدفئة بفوطة (Dry and stimulate with a towel)، وأصدق علامة لنجاح الإنعاش هي زيادة ضربات القلب (Increase in heart rate)."
+      },
+      {
+        id: "ped_20",
+        specialty: "Pediatrics",
+        subtopic: "Nutrition",
+        repeats: 6,
+        vignette: "A 10-month-old exclusively breastfed infant with limited sun exposure presents with craniotabes, widened wrists, and delayed sitting. Which biochemical marker is characteristically elevated, and what is the earliest clinical sign of improvement after Vitamin D and calcium therapy?",
+        options: [
+          "Elevated serum alkaline phosphatase (ALP); resolution of hypotonia (ability to sit)",
+          "Decreased serum parathyroid hormone (PTH); closure of the anterior fontanelle",
+          "Elevated serum 25-hydroxyvitamin D; disappearance of bowlegs within 48 hours",
+          "Decreased serum alkaline phosphatase; eruption of molar teeth"
+        ],
+        correct: 0,
+        keyFact: "Rickets is characterized by elevated serum alkaline phosphatase (ALP) levels due to increased osteoblastic activity. The earliest clinical sign of improvement following vitamin D and calcium supplementation is the resolution of hypotonia, often manifesting as the ability to sit.",
+        arabicTip: "اتكرر 6 مرات (x6)! لين العظام (Rickets) بيتميز بارتفاع Alkaline Phosphatase، وأول علامة إكلينيكية للتحسن بعد أخذ فيتامين د والكالسيوم هي تحسن ارتخاء العضلات والقدرة على الجلوس (Resolution of hypotonia / ability to sit)."
+      },
+      {
+        id: "ped_21",
+        specialty: "Pediatrics",
+        subtopic: "Gastroenterology / Surgery",
+        repeats: 5,
+        vignette: "A newborn with Down syndrome presents with bilious vomiting within the first hours of life without abdominal distension. Abdominal X-ray reveals a classic 'double-bubble' sign. What is the diagnosis?",
+        options: [
+          "Duodenal atresia",
+          "Congenital hypertrophic pyloric stenosis",
+          "Hirschsprung disease",
+          "Meckel diverticulum"
+        ],
+        correct: 0,
+        keyFact: "Duodenal atresia is strongly associated with Down syndrome and presents with early bilious vomiting and a double-bubble sign on abdominal X-ray (x5).",
+        arabicTip: "اتكرر 5 مرات (x5)! مولود داون + ترجيع أخضر (Bilious vomiting) + فقاعتين في الأشعة (Double-bubble sign) = Duodenal atresia."
+      },
+      {
+        id: "ped_22",
+        specialty: "Pediatrics",
+        subtopic: "Cardiovascular System",
+        repeats: 4,
+        vignette: "A 3-year-old boy with a known cyanotic congenital heart defect frequently assumes a squatting position after running, which relieves his dyspnea and cyanotic spells. Which defect does he have?",
+        options: [
+          "Tetralogy of Fallot",
+          "Isolated atrial septal defect",
+          "Coarctation of the aorta",
+          "Patent ductus arteriosus"
+        ],
+        correct: 0,
+        keyFact: "Tetralogy of Fallot presents with cyanosis, digital clubbing, and relief of hypercyanotic spells by squatting, which increases systemic vascular resistance (x4).",
+        arabicTip: "اتكرر 4 مرات (x4)! طفل أزرق ولما يتعب يقعد القرفصاء (Squatting) عشان يقلل الـ Right-to-left shunt = رباعي فالوت (Tetralogy of Fallot)."
+      },
+
+      // --- INTERNAL MEDICINE (18 Items) ---
+      {
+        id: "im_1",
+        specialty: "Internal Medicine",
+        subtopic: "Cardiology",
+        repeats: 15,
+        vignette: "A 66-year-old man with a history of ischemic cardiomyopathy presents to the emergency department with severe acute dyspnea, orthopnea, pink frothy sputum, jugular venous distention, an S3 gallop, and bilateral pulmonary crackles. Chest X-ray reveals cardiomegaly and pulmonary venous cephalization. What is the first-line pharmacological treatment?",
+        options: [
+          "Intravenous loop diuretics (e.g., furosemide)",
+          "High-dose intravenous beta-blockers (e.g., metoprolol)",
+          "Rapid intravenous bolus of 2 liters normal saline",
+          "Oral calcium channel blockers (e.g., verapamil)"
+        ],
+        correct: 0,
+        keyFact: "Intravenous loop diuretics are the first-line treatment for acute pulmonary edema.",
+        arabicTip: "اتكرر 15 مرة (x15)! أول ما تشوف مريض غرقان في مية الرئة (Acute pulmonary edema: orthopnea, S3 gallop, JVD, crackles) = أول علاج فوراً هو Intravenous loop diuretics (لازيكس وريدي)."
+      },
+      {
+        id: "im_2",
+        specialty: "Internal Medicine",
+        subtopic: "Hematology",
+        repeats: 15,
+        vignette: "A 22-year-old woman presents with a lifelong history of easy bruising, frequent epistaxis, and heavy menstrual bleeding. Laboratory workup shows a normal platelet count, a prolonged bleeding time, a normal PT, and a mildly prolonged aPTT. What is the most likely diagnosis?",
+        options: [
+          "Von Willebrand disease",
+          "Hemophilia A",
+          "Immune thrombocytopenic purpura (ITP)",
+          "Vitamin K deficiency"
+        ],
+        correct: 0,
+        keyFact: "Von Willebrand disease presents with a prolonged bleeding time and a mildly prolonged aPTT due to the deficiency of von Willebrand factor and its role in stabilizing factor VIII.",
+        arabicTip: "اتكرر 15 مرة في الباطنة و2 في الأطفال (x17)! نزيف أغشية مخاطية + Prolonged bleeding time + Mildly prolonged aPTT (بسبب دوره في تثبيت Factor VIII) = Von Willebrand disease."
+      },
+      {
+        id: "im_3",
+        specialty: "Internal Medicine",
+        subtopic: "Cardiology",
+        repeats: 10,
+        vignette: "A 38-year-old woman with a childhood history of rheumatic fever presents with progressive exertional dyspnea and hemoptysis. Cardiac auscultation at the apex reveals a loud first heart sound (S1), an early diastolic opening snap, and a low-pitched mid-diastolic rumbling murmur. What is the diagnosis?",
+        options: [
+          "Mitral stenosis",
+          "Aortic regurgitation",
+          "Mitral regurgitation",
+          "Aortic stenosis"
+        ],
+        correct: 0,
+        keyFact: "Mitral stenosis classically presents with a loud S1, an opening snap, and a mid-diastolic murmur at the cardiac apex, often leading to right-sided heart failure symptoms.",
+        arabicTip: "اتكرر 10 مرات (x10)! الثلاثية الموسيقية في قمة القلب: (Loud S1 + Opening snap + Mid-diastolic murmur at apex) = Mitral stenosis."
+      },
+      {
+        id: "im_4",
+        specialty: "Internal Medicine",
+        subtopic: "Rheumatology",
+        repeats: 10,
+        vignette: "A 52-year-old man wakes up with sudden, excruciating pain, redness, and swelling of his right first metatarsophalangeal (MTP) joint. Joint aspiration reveals needle-shaped, negatively birefringent monosodium urate crystals. Which of the following is the correct management strategy?",
+        options: [
+          "Treat the acute flare with NSAIDs, colchicine, or corticosteroids, and initiate allopurinol only AFTER the acute episode resolves",
+          "Start high-dose allopurinol immediately during the acute attack without anti-inflammatory drugs",
+          "Administer intra-articular allopurinol and intravenous aspirin",
+          "Perform urgent surgical arthrodesis of the first MTP joint"
+        ],
+        correct: 0,
+        keyFact: "Acute gout flares are managed with anti-inflammatory agents such as NSAIDs, colchicine, or corticosteroids, while urate-lowering therapy like allopurinol is initiated after the acute episode has resolved.",
+        arabicTip: "اتكرر 10 مرات (x10)! في هجمة النقرس الحادة (Acute gout flare) بندي مضاد التهاب (NSAIDs أو Colchicine أو Steroids)، والـ Allopurinol يبدأ فقط بعد انتهاء الهجمة الحادة."
+      },
+      {
+        id: "im_5",
+        specialty: "Internal Medicine",
+        subtopic: "Pulmonology",
+        repeats: 8,
+        vignette: "A 68-year-old man with diabetes and chronic heart failure is admitted with severe community-acquired pneumonia (CAP) presenting with high fever, productive cough, and right lobar consolidation. What is the recommended empiric antibiotic regimen?",
+        options: [
+          "A beta-lactam (such as ceftriaxone) combined with a macrolide (such as azithromycin)",
+          "Oral amoxicillin monotherapy",
+          "Intravenous metronidazole alone",
+          "Oral isoniazid for 6 months"
+        ],
+        correct: 0,
+        keyFact: "Severe community-acquired pneumonia in a patient with significant comorbidities is treated empirically with a beta-lactam (such as ceftriaxone) combined with a macrolide (such as azithromycin).",
+        arabicTip: "اتكرر 8 مرات (x8)! التهاب رئوي شديد من المجتمع في مريض عنده أمراض مزمنة = Ceftriaxone (Beta-lactam) + Azithromycin (Macrolide)."
+      },
+      {
+        id: "im_6",
+        specialty: "Internal Medicine",
+        subtopic: "Gastroenterology / Cardiology",
+        repeats: 8,
+        vignette: "A 55-year-old man presents with massive hematemesis and melena. After initial hemodynamic resuscitation with intravenous fluids and packed RBCs, what is the diagnostic and therapeutic procedure of choice?",
+        options: [
+          "Urgent upper gastrointestinal endoscopy",
+          "Barium swallow contrast study",
+          "Urea breath test",
+          "Elective colonoscopy after 2 weeks"
+        ],
+        correct: 0,
+        keyFact: "Urgent upper gastrointestinal endoscopy is the diagnostic and therapeutic procedure of choice for patients presenting with active upper gastrointestinal bleeding after initial resuscitation.",
+        arabicTip: "اتكرر 8 مرات في الجهاز الهضمي و6 في القلب (x14)! نزيف جهاز هضمي علوي نشط = أول خطوة محاليل وإنعاش (Resuscitation)، وبعدها فوراً منظار علوي عاجل (Urgent upper GI endoscopy)."
+      },
+      {
+        id: "im_7",
+        specialty: "Internal Medicine",
+        subtopic: "Endocrine",
+        repeats: 7,
+        vignette: "A 62-year-old patient admitted to the intensive care unit with severe sepsis develops persistent hyperglycemia (blood glucose 265 mg/dL). What is the recommended management and target blood glucose range?",
+        options: [
+          "Intravenous insulin infusion targeting a blood glucose range of 140 to 180 mg/dL",
+          "Oral metformin targeting a blood glucose below 90 mg/dL",
+          "Subcutaneous long-acting insulin targeting 220 to 250 mg/dL",
+          "No treatment unless glucose exceeds 350 mg/dL"
+        ],
+        correct: 0,
+        keyFact: "Critically ill patients with hyperglycemia should be managed with intravenous insulin infusions targeting a blood glucose range of 140 to 180 mg/dL.",
+        arabicTip: "اتكرر 7 مرات (x7)! مريض العناية المركزة (Critically ill) بيتعالج بـ IV insulin infusion والهدف الذهبي للسكر هو 140 إلى 180 mg/dL."
+      },
+      {
+        id: "im_8",
+        specialty: "Internal Medicine",
+        subtopic: "Neurology",
+        repeats: 7,
+        vignette: "A 32-year-old man wakes up unable to close his right eye or smile on the right side of his face. Examination shows complete paralysis of both the upper (forehead) and lower right facial muscles without limb weakness. What is the diagnosis?",
+        options: [
+          "Bell's palsy (unilateral lower motor neuron facial nerve paralysis)",
+          "Left middle cerebral artery ischemic stroke",
+          "Trigeminal neuralgia",
+          "Myasthenia gravis"
+        ],
+        correct: 0,
+        keyFact: "Bell's palsy is characterized by acute unilateral lower motor neuron facial nerve paralysis involving both the upper and lower face, distinguishing it from a central stroke which spares the forehead.",
+        arabicTip: "اتكرر 7 مرات في الأعصاب و2 في القلب (x9)! شلل نص الوجه كله فوق وتحت (Upper AND lower face) = Bell's palsy (LMN)، بينما الجلطة المركزية بتسيب الجبهة سليمة."
+      },
+      {
+        id: "im_9",
+        specialty: "Internal Medicine",
+        subtopic: "Gastroenterology",
+        repeats: 7,
+        vignette: "A 60-year-old woman taking high-dose ibuprofen daily for knee osteoarthritis presents with coffee-ground emesis and epigastric tenderness. Endoscopy reveals multiple superficial mucosal hemorrhages. What is the most likely cause?",
+        options: [
+          "Acute gastric erosion secondary to chronic NSAID use",
+          "Mallory-Weiss tear",
+          "Achalasia of the cardia",
+          "Peutz-Jeghers syndrome"
+        ],
+        correct: 0,
+        keyFact: "Acute gastric erosion is a common cause of upper gastrointestinal hemorrhage in patients with chronic nonsteroidal anti-inflammatory drug (NSAID) use.",
+        arabicTip: "اتكرر 7 مرات (x7)! نزيف معدة في مريض بياخد مسكنات (Chronic NSAIDs) سببه الأشهر هو Acute gastric erosion."
+      },
+      {
+        id: "im_10",
+        specialty: "Internal Medicine",
+        subtopic: "Endocrine",
+        repeats: 6,
+        vignette: "A 70-year-old woman with a history of untreated hypothyroidism is brought in stuporous with hypothermia (34.2°C), bradycardia (44 bpm), hypotension, and hypoventilation with hypercapnia. After drawing blood samples, what is the immediate definitive pharmacologic therapy?",
+        options: [
+          "Intravenous levothyroxine AND stress-dose glucocorticoids (hydrocortisone)",
+          "Oral propylthiouracil and propranolol",
+          "Intravenous insulin and potassium chloride",
+          "Oral levothyroxine alone without steroids"
+        ],
+        correct: 0,
+        keyFact: "Myxedema coma is characterized by hypothermia, hypotension, bradycardia, and hypoventilation leading to hypercapnia, and is managed with intravenous levothyroxine and stress-dose glucocorticoids to prevent adrenal crisis.",
+        arabicTip: "اتكرر 6 مرات في الغدد و5 في القلب (x11)! غيبوبة كسل الغدة (Myxedema coma) لازم تاخد الاتنين مع بعض وريدياً: IV Levothyroxine + Stress-dose Glucocorticoids."
+      },
+      {
+        id: "im_11",
+        specialty: "Internal Medicine",
+        subtopic: "Infectious Diseases",
+        repeats: 6,
+        vignette: "A 34-year-old man who works on a pig and cattle farm presents with a 3-week history of undulating fever, profuse night sweats, arthralgia, and hepatosplenomegaly. What is the most likely diagnosis and confirmatory test?",
+        options: [
+          "Brucellosis; confirmed by Brucella serology",
+          "Leptospirosis; confirmed by Monospot test",
+          "Lyme disease; confirmed by tuberculin skin test",
+          "Malaria; confirmed by urine culture"
+        ],
+        correct: 0,
+        keyFact: "Occupational exposure to livestock such as working on a pig farm is a key risk factor for brucellosis, confirmed by brucella serology.",
+        arabicTip: "اتكرر 6 مرات (x6)! أول ما تلاقي في السؤال مزرعة خنازير أو مواشي (Pig farm / livestock exposure) مع سخونية = Brucellosis وتأكيدها بـ Brucella serology."
+      },
+      {
+        id: "im_12",
+        specialty: "Internal Medicine",
+        subtopic: "Gastroenterology",
+        repeats: 6,
+        vignette: "A 25-year-old man presents with chronic crampy right lower quadrant abdominal pain, non-bloody diarrhea, weight loss, and perianal fistulas. Barium study shows narrowing of the terminal ileum ('string sign of Kantor'), and colonoscopy reveals skip lesions and cobblestone mucosa. What is the diagnosis?",
+        options: [
+          "Crohn disease",
+          "Ulcerative colitis",
+          "Irritable bowel syndrome",
+          "Pseudomembranous colitis"
+        ],
+        correct: 0,
+        keyFact: "Crohn disease is characterized by transmural inflammation, skip lesions, and terminal ileum involvement, showing the classic 'string sign of Kantor' on barium studies.",
+        arabicTip: "اتكرر 6 مرات + 4 لعلامة الخيط (x10)! التهاب في الـ Terminal ileum واخد كل الطبقات (Transmural) مع Skip lesions وعلامة الخيط في الباريوم (String sign of Kantor) = Crohn disease."
+      },
+      {
+        id: "im_13",
+        specialty: "Internal Medicine",
+        subtopic: "Pulmonology / Cardiology",
+        repeats: 6,
+        vignette: "A 42-year-old woman presents with progressive exertional dyspnea and fatigue. On cardiac auscultation, which specific physical examination finding strongly indicates pulmonary arterial hypertension?",
+        options: [
+          "A loud pulmonic component of the second heart sound (P2) relative to A2",
+          "A soft first heart sound (S1) at the apex",
+          "A continuous machinery murmur at the left sternal border",
+          "An Austin Flint murmur"
+        ],
+        correct: 0,
+        keyFact: "A loud pulmonic component of the second heart sound (P2) relative to the aortic component (A2) is a specific physical examination finding of pulmonary arterial hypertension.",
+        arabicTip: "اتكرر 6 مرات في الصدر و2 في القلب (x8)! العلامة المميزة لارتفاع ضغط الشريان الرئوي (Pulmonary arterial hypertension) بالسماعة هي Loud P2."
+      },
+      {
+        id: "im_14",
+        specialty: "Internal Medicine",
+        subtopic: "Hepatology",
+        repeats: 5,
+        vignette: "A 35-year-old man with ulcerative colitis presents with pruritus, fatigue, and jaundice. Laboratory tests show markedly elevated alkaline phosphatase (ALP), GGT, and conjugated bilirubin. MRCP reveals multifocal strictures and irregular bile duct caliber ('beading'). What is the diagnosis?",
+        options: [
+          "Primary sclerosing cholangitis (PSC)",
+          "Primary biliary cholangitis (PBC)",
+          "Autoimmune hepatitis",
+          "Gilbert syndrome"
+        ],
+        correct: 0,
+        keyFact: "Primary sclerosing cholangitis is associated with inflammatory bowel disease (especially ulcerative colitis) and shows a cholestatic pattern (elevated ALP, GGT, conjugated bilirubin) with irregular bile duct caliber and wall thickening on imaging.",
+        arabicTip: "اتكرر 5 مرات (x5)! مريض قولون تقرحي (IBD/UC) جاله صفراء انسدادية وضيق وتوسع في القنوات المرارية = Primary Sclerosing Cholangitis (PSC)."
+      },
+      {
+        id: "im_15",
+        specialty: "Internal Medicine",
+        subtopic: "Infectious Diseases",
+        repeats: 5,
+        vignette: "A 29-year-old asymptomatic healthcare worker has a positive tuberculin skin test (16 mm induration) during annual screening. His chest X-ray is completely normal and he has no cough, fever, or weight loss. What is the recommended management?",
+        options: [
+          "Isoniazid monotherapy for 6 months (for latent TB infection)",
+          "Four-drug RIPE therapy for 12 months",
+          "Immediate isolation in a negative-pressure room",
+          "No treatment required unless cavitary lesions appear"
+        ],
+        correct: 0,
+        keyFact: "Latent tuberculosis infection, defined by a positive tuberculin skin test in an asymptomatic patient with a normal chest radiograph, is treated with isoniazid for 6 months.",
+        arabicTip: "اتكرر 5 مرات (x5)! اختبار درن إيجابي بدون أي أعراض وأشعة الصدر سليمة = Latent TB، وعلاجه Isoniazid لمدة 6 شهور."
+      },
+      {
+        id: "im_16",
+        specialty: "Internal Medicine",
+        subtopic: "Hematology",
+        repeats: 7,
+        vignette: "A 58-year-old patient is found to have a persistent platelet count of 920,000/mm³. Which clinical feature best differentiates primary essential thrombocytosis from reactive (secondary) thrombocytosis?",
+        options: [
+          "Presence of vasomotor symptoms (erythromelalgia), arterial/venous thrombosis, or paradoxical hemorrhage",
+          "Elevated C-reactive protein and low serum ferritin",
+          "Resolution of thrombocytosis after iron supplementation",
+          "History of recent splenectomy or acute infection"
+        ],
+        correct: 0,
+        keyFact: "Essential thrombocytosis is differentiated from reactive thrombocytosis by the presence of vasomotor symptoms, thrombosis, or hemorrhage (x7).",
+        arabicTip: "اتكرر 7 مرات (x7)! اللي يفرق أورام الصفائح الأولية (Essential thrombocytosis) عن ارتفاع الصفائح التفاعلي هو وجود أعراض الأوعية الدموية أو الجلطات أو النزيف (Vasomotor symptoms, thrombosis, or hemorrhage)."
+      },
+      {
+        id: "im_17",
+        specialty: "Internal Medicine",
+        subtopic: "Rheumatology",
+        repeats: 6,
+        vignette: "A 45-year-old patient with long-standing severe psoriasis develops progressive osteolysis of the phalanges and metacarpals, resulting in telescoping ('opera-glass') fingers and severe joint deformity. What is this condition called?",
+        options: [
+          "Arthritis mutilans",
+          "Felty syndrome",
+          "Polymyalgia rheumatica",
+          "Reactive arthritis (Reiter syndrome)"
+        ],
+        correct: 0,
+        keyFact: "Arthritis mutilans is a severe, destructive form of psoriatic arthritis characterized by osteolysis and telescoping digits (x6).",
+        arabicTip: "اتكرر 6 مرات (x6)! تآكل وتدمير عظام الأصابع في مريض الصدفية (Psoriatic arthritis) = Arthritis mutilans."
+      },
+      {
+        id: "im_18",
+        specialty: "Internal Medicine",
+        subtopic: "Cardiology",
+        repeats: 5,
+        vignette: "A 61-year-old man admitted with an acute inferior wall myocardial infarction develops symptomatic sinus bradycardia (heart rate 38 bpm) with hypotension and dizziness. What is the first-line pharmacologic treatment?",
+        options: [
+          "Intravenous atropine",
+          "Intravenous verapamil",
+          "Oral propranolol",
+          "Intravenous adenosine"
+        ],
+        correct: 0,
+        keyFact: "Symptomatic sinus bradycardia complicating acute myocardial infarction is treated initially with intravenous atropine (x5).",
+        arabicTip: "اتكرر 5 مرات (x5)! بطء ضربات القلب المصحوب بأعراض (Symptomatic sinus bradycardia) بعد جلطة القلب علاجه الأول هو الأتروبين الوريدي (IV Atropine)."
+      },
+
+      // --- GENERAL SURGERY (15 Items) ---
+      {
+        id: "surg_1",
+        specialty: "General Surgery",
+        subtopic: "Acute Abdomen",
+        repeats: 11,
+        vignette: "A 44-year-old woman presents with persistent right upper quadrant pain, fever, nausea, and vomiting after a fatty meal. On examination, she arrests her inspiration during deep palpation of the right upper quadrant (positive Murphy sign). What is the most specific diagnostic finding on abdominal ultrasound?",
+        options: [
+          "Thick-walled gallbladder with pericholecystic fluid and gallstones",
+          "Coffee-bean sign in the left lower quadrant",
+          "Target sign in the right iliac fossa",
+          "Free air under the right hemidiaphragm"
+        ],
+        correct: 0,
+        keyFact: "Acute cholecystitis presents with a positive Murphy's sign (cessation of inspiration on deep RUQ palpation) and is specifically diagnosed by abdominal ultrasound showing a thick-walled gallbladder with pericholecystic fluid.",
+        arabicTip: "أعلى سؤال في الجراحة (اتكرر 11 مرة للسونار + 13 مرة لعلامة ميرفي = x24)! ميرفي إيجابي + جدار مرارة سميك وحواليه سائل في السونار (Thick-walled gallbladder with pericholecystic fluid) = Acute cholecystitis."
+      },
+      {
+        id: "surg_2",
+        specialty: "General Surgery",
+        subtopic: "Acute Abdomen",
+        repeats: 10,
+        vignette: "A 50-year-old man with a history of gallstones presents with sudden, severe epigastric pain radiating straight to his back, accompanied by profuse vomiting. Which laboratory threshold confirms the diagnosis of acute pancreatitis?",
+        options: [
+          "Serum amylase (or lipase) level greater than three times the upper limit of normal",
+          "Serum alkaline phosphatase mildly elevated above 1.5 times normal",
+          "Fasting blood glucose less than 50 mg/dL",
+          "Elevated alpha-fetoprotein (AFP)"
+        ],
+        correct: 0,
+        keyFact: "Acute pancreatitis is diagnosed by the presence of severe epigastric pain radiating to the back and a serum amylase level greater than three times the upper limit of normal.",
+        arabicTip: "اتكرر 10 مرات في الجراحة و9 في الباطنة (x19)! وجع فم المعدة بيسمع في الضهر + Serum amylase > 3 times upper limit of normal = Acute pancreatitis."
+      },
+      {
+        id: "surg_3",
+        specialty: "General Surgery",
+        subtopic: "Acute Abdomen",
+        repeats: 9,
+        vignette: "A 19-year-old male presents with periumbilical pain that migrated to the right iliac fossa over 12 hours, accompanied by anorexia, nausea, single episode of vomiting, low-grade fever, and localized right lower quadrant tenderness with guarding. What is the most likely diagnosis?",
+        options: [
+          "Acute appendicitis",
+          "Acute diverticulitis",
+          "Sigmoid volvulus",
+          "Chronic duodenal ulcer"
+        ],
+        correct: 0,
+        keyFact: "Acute appendicitis classically presents with right iliac fossa pain, anorexia, vomiting, and tenderness with guarding on examination.",
+        arabicTip: "اتكرر 9 مرات (x9)! وجع في الـ Right iliac fossa مع فقدان شهية (Anorexia) وترجيع وتحجر موضعي = Acute appendicitis."
+      },
+      {
+        id: "surg_4",
+        specialty: "General Surgery",
+        subtopic: "Anal Problems",
+        repeats: 8,
+        vignette: "A 36-year-old man presents with bright red rectal bleeding, perianal itching, and prolapsing anal lumps after defecation. Another patient presents with tearing knife-like pain during and after defecation accompanied by intense anal sphincter spasm. What are the two diagnoses respectively, and what is the definitive surgical treatment for the second condition if chronic and refractory?",
+        options: [
+          "1st: Hemorrhoids; 2nd: Anal fissure (treated with lateral internal sphincterotomy)",
+          "1st: Anal squamous carcinoma; 2nd: Fistula-in-ano (treated with APR)",
+          "1st: Pilonidal sinus; 2nd: Rectal prolapse (treated with rubber band ligation)",
+          "1st: Crohn disease; 2nd: Meckel diverticulum"
+        ],
+        correct: 0,
+        keyFact: "Hemorrhoids present with perianal itching, bleeding, and lumps depending on degree of prolapse (x8). Anal fissures present with severe pain during/after defecation and sphincter spasm (x5), and chronic refractory cases are treated with lateral internal sphincterotomy (x2).",
+        arabicTip: "البواسير (Hemorrhoids x8) = هرش ودم وكلكوعة، أما الشرخ الشرجي (Anal fissure x5) = ألم شديد وقت وبعد التبرز مع تقلص العضلة (Sphincter spasm) وعملية المزمن منه هي Lateral internal sphincterotomy."
+      },
+      {
+        id: "surg_5",
+        specialty: "General Surgery",
+        subtopic: "Bleeding Per Rectum",
+        repeats: 8,
+        vignette: "A 64-year-old man presents with significant bright red bleeding per rectum (hematochezia). He receives intravenous crystalloid resuscitation and his blood pressure and heart rate stabilize. What is the diagnostic procedure of choice now?",
+        options: [
+          "Colonoscopy",
+          "Barium enema",
+          "Diagnostic laparotomy",
+          "Capsule endoscopy"
+        ],
+        correct: 0,
+        keyFact: "Colonoscopy is the diagnostic procedure of choice for evaluating lower gastrointestinal bleeding once the patient is hemodynamically stable.",
+        arabicTip: "اتكرر 8 مرات في الجراحة و3 في الباطنة (x11)! نزيف شرجي سفلي (Lower GI bleeding) بعد ما المريض يستقر بالمحاليل = الفحص الأول هو منظار القولون (Colonoscopy)."
+      },
+      {
+        id: "surg_6",
+        specialty: "General Surgery",
+        subtopic: "Acute Abdomen",
+        repeats: 7,
+        vignette: "A 68-year-old man presents with a 2-day history of constant left iliac fossa pain, low-grade fever, constipation, leukocytosis, and elevated CRP. Examination reveals localized tenderness in the left lower quadrant. What is the most likely diagnosis?",
+        options: [
+          "Acute diverticulitis",
+          "Acute cholecystitis",
+          "Intussusception",
+          "Meckel diverticulitis"
+        ],
+        correct: 0,
+        keyFact: "Acute diverticulitis classically presents in older patients with left iliac fossa pain, low-grade fever, leukocytosis, and elevated inflammatory markers.",
+        arabicTip: "اتكرر 7 مرات (x7)! كبير في السن وعنده ألم في الجنب الشمال من تحت (Left iliac fossa pain) مع سخونية وارتفاع كرات الدم البيضاء = Acute diverticulitis."
+      },
+      {
+        id: "surg_7",
+        specialty: "General Surgery",
+        subtopic: "Acute Abdomen",
+        repeats: 7,
+        vignette: "A 74-year-old woman with a history of untreated cholelithiasis presents with colicky abdominal pain, bilious vomiting, and abdominal distension. Abdominal X-ray shows small-bowel air-fluid levels, pneumobilia (air in the biliary tree), and an ectopic radiopaque stone in the right iliac fossa. What is the definitive surgical treatment?",
+        options: [
+          "Enterotomy (ileotomy) and stone extraction",
+          "Endoscopic retrograde cholangiopancreatography (ERCP) alone",
+          "Total colectomy with ileostomy",
+          "Extracorporeal shockwave lithotripsy"
+        ],
+        correct: 0,
+        keyFact: "Gallstone ileus causing small-bowel obstruction is definitively treated by enterotomy (ileotomy) and stone extraction.",
+        arabicTip: "اتكرر 7 مرات (x7)! حصوة مرارة سدت الأمعاء الدقيقة (Gallstone ileus) = العلاج الجراحي هو فتح الأمعاء واستخراج الحصوة (Enterotomy / ileotomy and stone extraction)."
+      },
+      {
+        id: "surg_8",
+        specialty: "General Surgery",
+        subtopic: "Urology / Pediatric Surgery",
+        repeats: 10,
+        vignette: "A 15-year-old boy presents with sudden-onset severe left scrotal pain and nausea that started 2 hours ago. Examination reveals a high-riding, horizontally oriented left testis and an absent cremasteric reflex. Within what critical time window must surgical exploration and orchiopexy be performed to maximize testicular salvage?",
+        options: [
+          "Within 4 to 6 hours of symptom onset",
+          "Within 24 to 48 hours of symptom onset",
+          "After a 7-day course of oral ciprofloxacin",
+          "Only if scrotal gangrene develops"
+        ],
+        correct: 0,
+        keyFact: "Testicular torsion is a surgical emergency presenting with acute scrotal pain and an absent cremasteric reflex; it requires urgent surgical exploration and orchiopexy within 4-6 hours of symptom onset to preserve testicular viability.",
+        arabicTip: "اتكرر 10 مرات مجموع تكراراته (x5 جراحة + x5 أطفال)! التواء الخصية (Testicular torsion) = غياب Cremasteric reflex ولازم استكشاف جراحي وتثبيت (Orchiopexy) خلال 4 إلى 6 ساعات."
+      },
+      {
+        id: "surg_9",
+        specialty: "General Surgery",
+        subtopic: "Hernia",
+        repeats: 6,
+        vignette: "A 62-year-old man presents with a firm, painful, tense, irreducible swelling in the right groin associated with colicky abdominal pain, vomiting, and overlying skin erythema. What is the immediate management?",
+        options: [
+          "Urgent surgical intervention (exploration and repair) to prevent bowel ischemia",
+          "Forceful manual bedside reduction (taxis) under heavy sedation",
+          "Application of a groin truss and discharge home",
+          "Elective hernia repair scheduled in 3 months"
+        ],
+        correct: 0,
+        keyFact: "An irreducible, tender, or strangulated inguinal or femoral hernia requires urgent surgical intervention to prevent bowel ischemia and necrosis.",
+        arabicTip: "اتكرر 6 مرات (x6)! أي فتق مؤلم وغير قابل للرد أو مختنق (Irreducible / strangulated hernia) ممنوع رده باليد وعلاجه جراحة عاجلة فوراً (Urgent surgical intervention)."
+      },
+      {
+        id: "surg_10",
+        specialty: "General Surgery",
+        subtopic: "Wounds & Trauma",
+        repeats: 6,
+        vignette: "A 28-year-old construction worker presents to the clinic with a contaminated 5-cm forearm laceration that occurred 18 hours ago. What is the most appropriate wound management to minimize deep surgical site infection?",
+        options: [
+          "Local wound irrigation, debridement, and healing by secondary intention (or delayed closure)",
+          "Immediate tight primary suture closure without drainage",
+          "Application of topical steroids and occlusive plastic wrap",
+          "Immediate split-thickness skin grafting"
+        ],
+        correct: 0,
+        keyFact: "Lacerations presenting after a significant delay (>6-12 hours) should not undergo immediate primary suture closure due to high infection risk; they are managed with local wound care and allowed to heal by secondary intention.",
+        arabicTip: "اتكرر 6 مرات (x6)! جرح متأخر عدى عليه أكتر من 6 إلى 12 ساعة ممنوع يتخيط خياطة أولية (No primary closure)، بيتنظف ويُترك يلتئم بالنية الثانوية (Secondary intention)."
+      },
+      {
+        id: "surg_11",
+        specialty: "General Surgery",
+        subtopic: "Fractures & Urology",
+        repeats: 9,
+        vignette: "A 30-year-old man involved in a high-speed motor vehicle collision sustains a displaced pelvic fracture involving the pubic rami and sacroiliac joint. Examination shows blood at the urethral meatus and inability to void. Which anatomical structure is most likely injured?",
+        options: [
+          "Membranous urethra (posterior urethra)",
+          "Right renal cortex",
+          "Left ureteropelvic junction",
+          "Urachus"
+        ],
+        correct: 0,
+        keyFact: "Pelvic fractures involving the pubic rami and sacroiliac joint are strongly associated with membranous (posterior) urethral injury, presenting with blood at the urethral meatus.",
+        arabicTip: "اتكرر 9 مرات مجموع تكراراته (x6 عظام + x3 مسالك)! كسر عظام الحوض (Pelvic fracture) مع دم عند فتحة البول = إصابة مجرى البول الغشائي (Membranous urethral injury)، وممنوع تركيب قسطرة بولية قبل عمل Retrograde urethrogram."
+      },
+      {
+        id: "surg_12",
+        specialty: "General Surgery",
+        subtopic: "Preoperative & Coagulation",
+        repeats: 10,
+        vignette: "A hospitalized patient receiving a continuous intravenous unfractionated heparin infusion requires an urgent surgical procedure that can safely wait 3 hours. Why is pharmacological reversal with protamine sulfate generally unnecessary in this setting?",
+        options: [
+          "Unfractionated heparin has a short half-life, and its anticoagulant effect resolves within 2 to 3 hours after discontinuation",
+          "Unfractionated heparin does not affect the coagulation cascade in surgical patients",
+          "Heparin is irreversibly bound to platelets for 10 days",
+          "Vitamin K immediately neutralizes heparin within 5 minutes"
+        ],
+        correct: 0,
+        keyFact: "Unfractionated heparin has a short half-life, and its anticoagulant effect typically resolves within 2-3 hours after discontinuation without requiring reversal agents.",
+        arabicTip: "اتكرر 10 مرات مجموع تكراراته (x5 + x5)! الهيبارين العادي (Unfractionated heparin) عمر النصف بتاعه قصير جداً ومفعوله بينتهي خلال ساعتين لـ 3 ساعات فقط من إيقافه."
+      },
+      {
+        id: "surg_13",
+        specialty: "General Surgery",
+        subtopic: "Acute Abdomen",
+        repeats: 9,
+        vignette: "A 48-year-old man with chronic peptic ulcer disease develops sudden, severe generalized abdominal pain and a board-like rigid abdomen. What is the best initial imaging test, and what is the standard surgical repair for a perforated duodenal ulcer?",
+        options: [
+          "Upright chest X-ray (to detect free subdiaphragmatic air); surgical repair using an omental patch (Graham patch)",
+          "Barium meal study; total gastrectomy",
+          "Abdominal MRI; endoscopic variceal banding",
+          "Supine pelvic X-ray; Whipple procedure"
+        ],
+        correct: 0,
+        keyFact: "Perforated peptic ulcer presents with sudden severe pain and board-like abdominal rigidity. Upright chest X-ray is the initial imaging to detect pneumoperitoneum (x5), and surgical closure using an omental patch (Graham patch) is the standard treatment (x4).",
+        arabicTip: "اتكرر 9 مرات (x5 للأشعة + x4 للعملية)! انفجار قرحة المعدة أو الاثنى عشر = بطن متحجرة (Board-like rigidity)، أول أشعة هي Upright chest X-ray لرؤية الهواء تحت الحجاب الحاجز، والعملية هي رقعة منديل البطن (Omental Graham patch)."
+      },
+      {
+        id: "surg_14",
+        specialty: "General Surgery",
+        subtopic: "Orthopedics",
+        repeats: 10,
+        vignette: "A 24-year-old football player twists his flexed knee while his foot is planted, developing medial joint-line pain, swelling, clicking, and episodic knee locking. Also, concerning tibial shaft fractures, which treatment approach carries a higher incidence of nonunion?",
+        options: [
+          "Knee injury: Medial meniscus tear; Tibial fracture: Open reduction carries a higher incidence of nonunion than closed reduction",
+          "Knee injury: Patellar tendon rupture; Tibial fracture: Closed reduction has a higher nonunion rate",
+          "Knee injury: Achilles tendinitis; Tibial fracture: Cast immobilization always causes nonunion",
+          "Knee injury: Hip dislocation; Tibial fracture: Nonunion never occurs in the tibia"
+        ],
+        correct: 0,
+        keyFact: "A medial meniscus tear presents with knee locking and clicking following flexion and rotation injury (x5). Open reduction of tibial fractures is associated with a higher incidence of nonunion compared to closed reduction due to disruption of periosteal blood supply (x5).",
+        arabicTip: "سؤالين عظام كل واحد اتكرر 5 مرات (x10)! التواء الركبة وهي متنية مع Locking & clicking = Medial meniscus tear. وفي كسر القصبة (Tibial fracture)، الفتح الجراحي (Open reduction) بيعمل Nonunion أكتر من الرد المغلق لأنه بيقشر السمحاق (Periosteum)."
+      },
+      {
+        id: "surg_15",
+        specialty: "General Surgery",
+        subtopic: "Hepatobiliary Surgery",
+        repeats: 4,
+        vignette: "A 32-year-old woman on long-term oral contraceptives is found to have a solitary 6.5-cm hepatic adenoma on abdominal CT. What is the recommended management due to the high risk of spontaneous hemorrhage and malignant transformation?",
+        options: [
+          "Surgical resection (for hepatic adenomas > 5 cm or symptomatic lesions)",
+          "Continue oral contraceptives and repeat ultrasound in 5 years",
+          "Percutaneous needle aspiration only",
+          "High-dose estrogen therapy"
+        ],
+        correct: 0,
+        keyFact: "Hepatic adenomas greater than 5 cm or those that are symptomatic require surgical resection due to the risk of rupture, hemorrhage, and malignant transformation (x4).",
+        arabicTip: "اتكرر 4 مرات (x4)! الورم الغدي في الكبد (Hepatic adenoma) لو حجمه أكبر من 5 سم أو عامل أعراض لازم استئصال جراحي (Surgical resection)."
+      },
+
+      // --- OBSTETRICS & GYNECOLOGY (10 Items) ---
+      {
+        id: "ob_1",
+        specialty: "Ob/Gyn",
+        subtopic: "Gynecologic Infections",
+        repeats: 12,
+        vignette: "A 23-year-old woman presents with mucopurulent cervicitis, and nucleic acid amplification testing (NAAT) confirms Neisseria gonorrhoeae infection. Why must her treatment regimen also include coverage for Chlamydia trachomatis?",
+        options: [
+          "Patients diagnosed with gonorrhea should be empirically treated for chlamydia due to the high rate of coinfection",
+          "Neisseria gonorrhoeae spontaneously mutates into Chlamydia trachomatis in vivo",
+          "Chlamydia treatment prevents vaccine-induced anaphylaxis",
+          "Penicillin G is the only drug used for both organisms"
+        ],
+        correct: 0,
+        keyFact: "Patients diagnosed with gonorrhea should be empirically treated for chlamydia due to the high rate of coinfection.",
+        arabicTip: "أعلى سؤال في النساء والتوليد (اتكرر 12 مرة x12)! أي مريضة تتشخص سيلان (Gonorrhea) لازم تاخد علاج الكلاميديا تلقائياً (Empiric treatment for Chlamydia) بسبب نسبة العدوى المشتركة العالية جداً."
+      },
+      {
+        id: "ob_2",
+        specialty: "Ob/Gyn",
+        subtopic: "Labor & Delivery",
+        repeats: 9,
+        vignette: "Following a spontaneous vaginal delivery, inspection of the perineum reveals a laceration that extends through the vaginal mucosa and perineal body muscles (bulbocavernosus and transverse perineal muscles), while the external and internal anal sphincters remain completely intact. How is this laceration classified?",
+        options: [
+          "Second-degree perineal laceration",
+          "First-degree perineal laceration",
+          "Third-degree perineal laceration",
+          "Fourth-degree perineal laceration"
+        ],
+        correct: 0,
+        keyFact: "A second-degree perineal laceration involves the perineal body muscles and vaginal mucosa but does not involve the anal sphincter.",
+        arabicTip: "اتكرر 9 مرات (x9)! جرح العجان اللي واصل لعضلات العجان (Perineal muscles) ولكن عضلة الشرج سليمة (Anal sphincter intact) = الدرجة الثانية (Second-degree perineal laceration)."
+      },
+      {
+        id: "ob_3",
+        specialty: "Ob/Gyn",
+        subtopic: "Gynecologic Oncology",
+        repeats: 9,
+        vignette: "A 61-year-old postmenopausal woman presents with a 2-week history of painless vaginal spotting. Her last menstrual period was 10 years ago. What is the mandatory diagnostic step to rule out malignancy?",
+        options: [
+          "Endometrial sampling (endometrial biopsy) to exclude endometrial carcinoma",
+          "Reassurance and oral combined contraceptives",
+          "Serum CA-125 level alone",
+          "Diagnostic laparoscopy for endometriosis"
+        ],
+        correct: 0,
+        keyFact: "Postmenopausal vaginal bleeding is a major red flag for endometrial carcinoma and requires prompt evaluation with endometrial biopsy/sampling.",
+        arabicTip: "اتكرر 9 مرات مجموع تكراراته (x5 + x4)! أي نزيف مهبلي بعد انقطاع الطمث (Postmenopausal bleeding) = سرطان بطانة الرحم حتى يثبت العكس، ولازم أخذ عينة من بطانة الرحم (Endometrial biopsy)."
+      },
+      {
+        id: "ob_4",
+        specialty: "Ob/Gyn",
+        subtopic: "Menstrual Cycle & Contraception",
+        repeats: 8,
+        vignette: "A 21-year-old woman with regular 28-day menstrual cycles presents with recurrent, self-limiting unilateral lower abdominal pain and slight spotting occurring consistently on day 14 of her cycle. In another room, a woman with a copper IUD develops severe PID (fever, adnexal tenderness, cervical motion tenderness). What are the diagnosis of the first patient and the management of the second?",
+        options: [
+          "1st: Mittelschmerz (ovulatory pain); 2nd: Remove the IUD and administer broad-spectrum antibiotics",
+          "1st: Ruptured ectopic pregnancy; 2nd: Leave the IUD without antibiotics",
+          "1st: Adenomyosis; 2nd: Immediate hysterectomy",
+          "1st: Asherman syndrome; 2nd: Insert a second hormonal IUD"
+        ],
+        correct: 0,
+        keyFact: "Mittelschmerz is characterized by mid-cycle pelvic pain and spotting associated with ovulation (x8). Severe pelvic inflammatory disease (PID) in a patient with an IUD is managed by removing the IUD and administering antibiotics (x8).",
+        arabicTip: "سؤالين كل واحد اتكرر 8 مرات (x16)! وجع ونقطتين دم في نص الدورة (اليوم 14) = ألم التبويض (Mittelschmerz). والتهاب الحوض الشديد في وجود لولب (PID with IUD) = شيل اللولب وادي مضاد حيوي (Remove IUD + antibiotics)."
+      },
+      {
+        id: "ob_5",
+        specialty: "Ob/Gyn",
+        subtopic: "Medical Disorders in Pregnancy",
+        repeats: 7,
+        vignette: "A 29-year-old pregnant woman at 25 weeks gestation presents with recurrent, persistent vulvovaginal candidiasis and 2+ glucosuria on routine urine dipstick. What test is indicated, and if Gestational Diabetes Mellitus (GDM) is confirmed, what is the first-line management?",
+        options: [
+          "Screen for gestational diabetes mellitus (GDM); first-line management is lifestyle modification with dietary changes and exercise",
+          "Order renal biopsy; start high-dose oral glibenclamide immediately",
+          "Perform immediate cesarean delivery at 26 weeks",
+          "Start intravenous regular insulin infusion without dietary changes"
+        ],
+        correct: 0,
+        keyFact: "Persistent vaginal candidiasis and glucosuria during pregnancy warrant screening for gestational diabetes mellitus (x7). The first-line management for GDM is lifestyle modification, including dietary changes and regular exercise (x7).",
+        arabicTip: "سؤالين كل واحد اتكرر 7 مرات (x14)! التهابات فطرية متكررة وسكر في البول في الحامل = افحص سكر الحمل (Screen for GDM). والخط الأول لعلاج سكر الحمل هو تظبيط الأكل والرياضة (Diet and exercise) قبل الإنسولين."
+      },
+      {
+        id: "ob_6",
+        specialty: "Ob/Gyn",
+        subtopic: "Medical Disorders in Pregnancy",
+        repeats: 7,
+        vignette: "A 31-year-old woman at 33 weeks gestation presents with intense generalized pruritus, especially on her palms and soles at night, without any primary skin rash. Laboratory workup shows elevated serum bile acids and mildly elevated transaminases. What is the diagnosis, and what important counseling point must be discussed?",
+        options: [
+          "Intrahepatic cholestasis of pregnancy; it carries a high rate of recurrence in subsequent pregnancies",
+          "Pemphigoid gestationis; it never recurs in future pregnancies",
+          "Acute fatty liver of pregnancy; it is benign and requires no monitoring",
+          "HELLP syndrome; treated with topical calamine lotion alone"
+        ],
+        correct: 0,
+        keyFact: "Intrahepatic cholestasis of pregnancy presents in the third trimester with generalized pruritus in the absence of a rash and elevated serum bile acids (x6); it has a high rate of recurrence (60-90%) in subsequent pregnancies (x7).",
+        arabicTip: "اتكرر 13 مرة مجموع تكراراته (x7 + x6)! هرش في الجسم كله في آخر الحمل بدون طفح جلدي + ارتفاع Bile acids = Intrahepatic cholestasis of pregnancy، ومهم جداً إنه بيتكرر بنسبة عالية في الحمل القادم (High recurrence rate)."
+      },
+      {
+        id: "ob_7",
+        specialty: "Ob/Gyn",
+        subtopic: "High-Risk Pregnancy & Preeclampsia",
+        repeats: 11,
+        vignette: "A pregnant woman with Antiphospholipid Syndrome (APS) develops severe preeclampsia (BP 165/112 mmHg, proteinuria, headache, visual disturbances). What is the recommended gestational age for planned delivery in APS complicated by preeclampsia, and what drug is given for eclampsia seizure prophylaxis?",
+        options: [
+          "Delivery at 34 weeks of gestation; intravenous magnesium sulfate for seizure prophylaxis",
+          "Expectant management until 42 weeks; intravenous phenytoin",
+          "Immediate termination at 20 weeks; oral diazepam",
+          "Delivery at 40 weeks; oral ACE inhibitors"
+        ],
+        correct: 0,
+        keyFact: "In a pregnant patient with a history of antiphospholipid syndrome and preeclampsia, delivery is recommended at 34 weeks of gestation (x7). Intravenous magnesium sulfate is the drug of choice for seizure prophylaxis and treatment in severe preeclampsia/eclampsia (x11 total).",
+        arabicTip: "سؤالين في غاية الأهمية! حامل عندها Antiphospholipid syndrome + Preeclampsia بتولد عند الأسبوع 34 (Delivery at 34 weeks x7). ودواء منع وعلاج تشنجات تسمم الحمل هو المغنيسيوم سلفات الوريدي (IV Magnesium Sulfate x11)، وأول خطوة وقت التشنج الفعلي هي حماية المريضة من إيذاء نفسها (Ensure patient safety x6)."
+      },
+      {
+        id: "ob_8",
+        specialty: "Ob/Gyn",
+        subtopic: "Abnormal Labor & PCOS",
+        repeats: 7,
+        vignette: "A term fetus is found in a persistent transverse lie (or mentoposterior face presentation) during active labor. Meanwhile, in the outpatient clinic, a 22-year-old woman with PCOS presents with oligomenorrhea and facial hirsutism without virilization. What is the delivery method for the first patient and first-line therapy for the second?",
+        options: [
+          "1st: Cesarean delivery; 2nd: Combined oral contraceptives (COCs)",
+          "1st: Vacuum extraction; 2nd: Bilateral oophorectomy",
+          "1st: Forceps vaginal delivery; 2nd: Danazol",
+          "1st: Oxytocin augmentation; 2nd: Progesterone-only pills"
+        ],
+        correct: 0,
+        keyFact: "Fetal malpresentation such as a persistent transverse lie or mentoposterior face position requires cesarean delivery (x7). Combined oral contraceptives (COCs) are the first-line therapy for managing menstrual irregularities and hirsutism in women with PCOS not seeking pregnancy (x6).",
+        arabicTip: "الوضع المستعرض (Transverse lie) أو الوجه الخلفي (Mentoposterior) = قيصرية فوراً (Cesarean delivery x7). والخط الأول لعلاج الشعر الزائد ولخبطة الدورة في تكيس المبايض (PCOS) هو حبوب منع الحمل المركبة (Combined Oral Contraceptives x6)."
+      },
+      {
+        id: "ob_9",
+        specialty: "Ob/Gyn",
+        subtopic: "Maternal Physiology & Labor",
+        repeats: 5,
+        vignette: "A woman at 36 weeks gestation lies flat on her back during an ultrasound exam and suddenly develops hypotension, pallor, sweating, dizziness, and fetal bradycardia. What is the underlying mechanism and immediate management?",
+        options: [
+          "Supine hypotensive syndrome due to compression of the inferior vena cava (IVC) by the gravid uterus; position her in the left lateral decubitus position",
+          "Amniotic fluid embolism; perform immediate hysterectomy",
+          "Ruptured cerebral aneurysm; administer IV mannitol",
+          "Preeclampsia; administer oral labetalol while keeping her flat on her back"
+        ],
+        correct: 0,
+        keyFact: "Supine hypotensive syndrome in late pregnancy is caused by compression of the inferior vena cava (IVC) by the gravid uterus, reducing venous return and cardiac output, and is relieved by left lateral tilt (x5).",
+        arabicTip: "اتكرر 5 مرات (x5)! هبوط الضغط لما الحامل تنام على ضهرها سببه ضغط الرحم على الوريد الأجوف السفلي (Compression of IVC) وحله تنام على جنبها الشمال."
+      },
+      {
+        id: "ob_10",
+        specialty: "Ob/Gyn",
+        subtopic: "Antepartum Hemorrhage & Abnormal Labor",
+        repeats: 5,
+        vignette: "During a cesarean section for severe placental abruption, the uterus appears dark purple/bluish and ecchymotic due to extravasation of blood into the myometrium. Also, how is a prolonged latent phase of labor defined in a nulliparous vs. multiparous woman?",
+        options: [
+          "Uterine finding: Couvelaire uterus; Prolonged latent phase: > 20 hours in nullipara and > 14 hours in multipara",
+          "Uterine finding: Bandl ring; Prolonged latent phase: > 4 hours in nullipara",
+          "Uterine finding: Bicornuate uterus; Prolonged latent phase: > 48 hours in multipara",
+          "Uterine finding: Uterine inversion; Prolonged latent phase: > 2 hours in all patients"
+        ],
+        correct: 0,
+        keyFact: "Couvelaire uterus refers to intramyometrial bleeding secondary to severe placental abruption (x5). Prolonged latent phase of labor is defined as >20 hours in nulliparous women and >14 hours in multiparous women (x5).",
+        arabicTip: "سؤالين كل واحد اتكرر 5 مرات (x10)! ارتشاح الدم داخل عضلة الرحم مع انفصال المشيمة اسمه رحم كوفلير (Couvelaire uterus). وطول المرحلة الكامنة للولادة (Prolonged latent phase) هو أكثر من 20 ساعة للبكرية و14 ساعة للمتكررة."
+      },
+
+      // --- EMERGENCY MEDICINE (5 Items) ---
+      {
+        id: "er_1",
+        specialty: "Emergency",
+        subtopic: "Trauma & Airway",
+        repeats: 6,
+        vignette: "A 27-year-old man arrives following a high-speed motorcycle crash with severe maxillofacial trauma, copious oral bleeding, and stridor. Endotracheal intubation fails twice, and bag-mask ventilation is unable to maintain oxygenation. What is the immediate life-saving procedure?",
+        options: [
+          "Emergency surgical cricothyrotomy",
+          "Hyperextension of the cervical spine and blind nasal intubation",
+          "Diagnostic bronchoscopy",
+          "Insertion of a nasogastric tube"
+        ],
+        correct: 0,
+        keyFact: "In the primary survey, airway maintenance with cervical spine stabilization is first priority (using modified jaw-thrust x4). Cricothyrotomy is indicated for emergency airway management when severe upper airway obstruction prevents both endotracheal intubation and bag-mask ventilation (x6).",
+        arabicTip: "اتكرر 6 مرات (x6)! فشل تركيب الأنبوبة الحنجرية وفشل التنفس بالماسك (Can't intubate, can't ventilate) في انسداد مجرى الهواء العلوي = فتح جراحي فوري في الغشاء الحلقي الدرقي (Cricothyrotomy)."
+      },
+      {
+        id: "er_2",
+        specialty: "Emergency",
+        subtopic: "Thoracic Trauma",
+        repeats: 5,
+        vignette: "A 32-year-old man presents with acute dyspnea, pleuritic chest pain, absent breath sounds, and hyperresonance on the right hemithorax following chest trauma, confirming a large symptomatic pneumothorax. Another stable patient has isolated uncomplicated rib fractures. How are they managed respectively?",
+        options: [
+          "1st: Tube thoracostomy (chest tube insertion); 2nd: Supplemental oxygen and adequate analgesia",
+          "1st: Observation without oxygen; 2nd: Immediate thoracotomy",
+          "1st: Oral antibiotics alone; 2nd: Tight circumferential chest taping",
+          "1st: Pericardiocentesis; 2nd: Mechanical ventilation"
+        ],
+        correct: 0,
+        keyFact: "Symptomatic pneumothorax is managed with tube thoracostomy to evacuate air from the pleural space (x5). Stable patients with blunt chest trauma and isolated rib fractures are managed conservatively with supplemental oxygen and analgesia (x4).",
+        arabicTip: "استرواح الصدر المصحوب بأعراض (Symptomatic pneumothorax) علاجه أنبوبة صدرية (Tube thoracostomy x5)، بينما كسر الضلوع المستقر البسيط علاجه أكسجين ومسكنات ألم فقط (Oxygen and analgesia x4)."
+      },
+      {
+        id: "er_3",
+        specialty: "Emergency",
+        subtopic: "Toxicology",
+        repeats: 5,
+        vignette: "A 40-year-old agricultural worker is brought in with pinpoint pupils, profuse sweating, salivation, lacrimation, involuntary urination, bradycardia, and copious bronchial secretions (bronchorrhea) after spraying insecticide. Intravenous atropine is started. What is the clinical endpoint for atropine titration?",
+        options: [
+          "Drying of bronchial secretions (resolution of bronchorrhea) and adequate oxygenation",
+          "Complete dilation of pupils (mydriasis) to > 8 mm",
+          "Heart rate exceeding 160 beats per minute",
+          "Urinary output exceeding 500 mL/hour"
+        ],
+        correct: 0,
+        keyFact: "In organophosphate poisoning, atropine is the initial antidote of choice, and its therapeutic endpoint is the drying of bronchial secretions.",
+        arabicTip: "اتكرر 5 مرات (x5)! التسمم بالمبيدات الحشرية (Organophosphate poisoning) ترياقه الأول هو Atropine، والعلامة اللي بنوقف أو نظبط عليها الجرعة هي جفاف إفرازات الرئة والشعب الهوائية (Drying of bronchial secretions) وليس اتساع حدقة العين!"
+      },
+      {
+        id: "er_4",
+        specialty: "Emergency",
+        subtopic: "Pulmonary Embolism & Prehospital Trauma",
+        repeats: 8,
+        vignette: "A 54-year-old postoperative patient develops sudden pleuritic chest pain, tachypnea, and tachycardia (BP 124/78 mmHg) with a high clinical probability of pulmonary embolism (PE). What is the immediate management while awaiting CT pulmonary angiography?",
+        options: [
+          "Initiate immediate anticoagulation (e.g., intravenous heparin) prior to or while arranging confirmatory CT pulmonary angiography",
+          "Withhold all anticoagulants until a pulmonary biopsy is performed",
+          "Administer systemic thrombolysis (tPA) immediately despite normal blood pressure",
+          "Perform emergency open pulmonary embolectomy"
+        ],
+        correct: 0,
+        keyFact: "In a hemodynamically stable patient with a high clinical suspicion of pulmonary embolism, immediate anticoagulation (such as intravenous heparin) should be initiated while arranging confirmatory CT pulmonary angiography (x4 ER + x4 IM).",
+        arabicTip: "اتكرر 8 مرات (x4 طوارئ + x4 باطنة)! لو الاشتباه الإكلينيكي عالي في جلطة الرئة (Suspected PE) والمريض مستقر، ابدأ الهيبارين الوريدي فوراً (Immediate anticoagulation) وأنت بتجهز للأشعة المقطعية بالصبغة (CTPA)."
+      },
+      {
+        id: "er_5",
+        specialty: "Emergency",
+        subtopic: "Ophthalmic & Environmental Emergencies",
+        repeats: 4,
+        vignette: "A metalworker presents with acute eye pain after hammering steel without goggles, raising suspicion of an intraocular metallic foreign body. Why is MRI contraindicated, and what is the imaging modality of choice?",
+        options: [
+          "CT scan of the orbit is the imaging modality of choice; MRI is contraindicated because magnetic forces can move the metallic fragment and cause severe intraocular damage",
+          "MRI of the orbit is first-line because it avoids radiation",
+          "Tonometry with deep corneal pressure is first-line",
+          "Barium radiography of the skull is the gold standard"
+        ],
+        correct: 0,
+        keyFact: "For suspected metallic intraocular foreign bodies, a CT scan of the orbit is the preferred diagnostic modality, as MRI is contraindicated due to the risk of magnetic movement of the foreign body (x4).",
+        arabicTip: "اتكرر 4 مرات (x4)! شظية معدنية داخل العين (Metallic intraocular foreign body) = أشعة مقطعية على الحجاج (CT orbit)، وممنوع الرنين المغناطيسي (MRI contraindicated) عشان المغناطيس مايحركش الحديدة جوه العين."
+      },
+
+      // --- ETHICS & PATIENT SAFETY (5 Items) ---
+      {
+        id: "eth_1",
+        specialty: "Ethics & Safety",
+        subtopic: "Medical Ethics",
+        repeats: 8,
+        vignette: "A 58-year-old mentally competent adult patient with critical upper GI bleeding understands the risks and benefits of blood transfusion, including the risk of death, yet firmly refuses blood products based on personal beliefs. Under which ethical principle must the physician respect his decision?",
+        options: [
+          "Autonomy (respecting a competent adult's right to refuse even life-saving medical treatment)",
+          "Paternalism (overriding the patient's wishes to save his life)",
+          "Financial utilitarianism",
+          "Non-disclosure"
+        ],
+        correct: 0,
+        keyFact: "A competent adult patient has the legal and ethical right to refuse any medical treatment, even if the refusal may lead to death, based on the principle of autonomy.",
+        arabicTip: "أعلى سؤال في الأخلاقيات (اتكرر 8 مرات x8)! مريض بالغ وعاقل وكامل الأهلية (Competent adult) من حقه يرفض أي علاج حتى لو كان منقذاً للحياة بناءً على مبدأ الاستقلالية (Autonomy)."
+      },
+      {
+        id: "eth_2",
+        specialty: "Ethics & Safety",
+        subtopic: "Medical Ethics",
+        repeats: 9,
+        vignette: "A 65-year-old alert and competent man is newly diagnosed with metastatic colon cancer. Before the physician enters the room, the patient's adult children ask the physician not to tell their father the diagnosis because it would make him lose hope. What is the most appropriate ethical action?",
+        options: [
+          "Speak with the patient first to determine his preferences regarding disclosure of his medical information and involvement of family members",
+          "Promise the family that you will lie to the patient and tell him he only has benign gastritis",
+          "Disclose the full diagnosis to the neighbors instead",
+          "Refuse to treat the patient further"
+        ],
+        correct: 0,
+        keyFact: "When a family requests that a serious diagnosis be withheld from a competent patient, the physician should first determine the patient's preferences regarding the disclosure of information and the involvement of family members (x5 + x4).",
+        arabicTip: "اتكرر 9 مرات مجموع تكراراته (x5 + x4)! لو أهل المريض طلبوا منك تخبي عليه تشخيص خطير، الصح إنك تسأل المريض نفسه الأول هو حابب يعرف تفاصيل تشخيصه إزاي ومين من أهله يحب يشركه في القرار."
+      },
+      {
+        id: "eth_3",
+        specialty: "Ethics & Safety",
+        subtopic: "Patient Safety",
+        repeats: 6,
+        vignette: "Immediately prior to skin incision for an elective right total knee arthroplasty, the entire operating room team pauses to conduct a mandatory safety check. What is this process called, and what does it verify?",
+        options: [
+          "Surgical Time-Out; to verify the correct patient identity, correct anatomical site, and correct surgical procedure",
+          "Root cause analysis; performed only after a fatal error occurs",
+          "Morbidity and mortality conference; performed 30 days postoperatively",
+          "Informed consent waiver"
+        ],
+        correct: 0,
+        keyFact: "A surgical time-out is a mandatory pause conducted by the entire surgical team immediately before skin incision to verify the correct patient, site, and procedure.",
+        arabicTip: "اتكرر 6 مرات (x6)! الوقفة الإلزامية لكل فريق العمليات قبل فتح الجلد مباشرة اسمها Surgical Time-Out للتأكد من المريض الصحيح، والمكان الصحيح، والعملية الصحيحة."
+      },
+      {
+        id: "eth_4",
+        specialty: "Ethics & Safety",
+        subtopic: "Patient Safety",
+        repeats: 6,
+        vignette: "At the conclusion of an abdominal operation, the surgical instrument and sponge count is discrepant, and a missing surgical item cannot be located despite thorough wound exploration and intraoperative X-ray review. What is the standard protocol?",
+        options: [
+          "Notify the operating room supervisor, accurately document the incident in the medical record, and retain all imaging records",
+          "Falsify the sponge count sheet to show a correct count and avoid legal trouble",
+          "Blame the anesthesia technician without documenting the discrepancy",
+          "Delete the intraoperative X-ray from the hospital PACS system"
+        ],
+        correct: 0,
+        keyFact: "When a missing surgical item cannot be located during an operation, standard protocol requires notifying the operating room supervisor, documenting the incident, and retaining imaging records.",
+        arabicTip: "اتكرر 6 مرات (x6)! لو فيه آلة أو فوطة جراحية مفقودة في العمليات، البروتوكول هو: إبلاغ مشرف غرفة العمليات + توثيق الواقعة بدقة + الاحتفاظ بسجلات وصور الأشعة."
+      },
+      {
+        id: "eth_5",
+        specialty: "Ethics & Safety",
+        subtopic: "Infection Control",
+        repeats: 6,
+        vignette: "What is the single most effective measure for preventing healthcare-associated infections (HAIs) and transmission of multidrug-resistant organisms in hospitals, and how should surfaces contaminated with Clostridium difficile spores be disinfected?",
+        options: [
+          "Hand hygiene (soap and water when visibly soiled or after C. diff; alcohol rub otherwise); disinfect C. diff surfaces with a 1:10 diluted bleach solution",
+          "Routine prophylactic intravenous vancomycin for all hospital staff; disinfect surfaces with plain tap water",
+          "Wearing sterile surgical boots in outpatient clinics; disinfect surfaces with 70% alcohol only",
+          "Closing the ICU every weekend; ultraviolet light for 10 seconds"
+        ],
+        correct: 0,
+        keyFact: "Hand hygiene is the single most effective measure for preventing healthcare-associated infections (x6). Soap and water must be used when hands are visibly soiled (x2), and surfaces contaminated with C. difficile spores require a 1:10 diluted bleach solution (x2).",
+        arabicTip: "اتكرر 6 مرات (x6)! أهم وأقوى إجراء لمنع عدوى المستشفيات هو غسيل اليدين (Hand hygiene). ولو اليد متسخة ظاهرياً أو بعد التعامل مع C. difficile لازم مية وصابون، وتطهير أسطح C. difficile بيكون بمحلول كلور مخفف 1:10 (1:10 diluted bleach)."
+      }
+    ];
+
+    // ==========================================
+    // 4. APPLICATION STATE & LOCAL STORAGE
+    // ==========================================
+    let currentTab = 'schedule';
+    let activeStoryIdx = 0;
+    let isStoryMasked = false;
+    let fcSpecialty = 'ALL';
+    let cardStates = JSON.parse(localStorage.getItem('emle_2026_cards') || '{}');
+    let checkedTasks = JSON.parse(localStorage.getItem('emle_2026_tasks') || '{}');
+
+    // Quiz State
+    let quizList = [];
+    let currentQIndex = 0;
+    let userAnswers = {};
+    let quizSecondsRemaining = 7200; // 2 hours
+    let quizTimerInterval = null;
+
+    // ==========================================
+    // 5. NAVIGATION & THEME FUNCTIONS
+    // ==========================================
+    function switchTab(tabId) {
+      currentTab = tabId;
+      const tabs = ['schedule', 'stories', 'flashcards', 'quiz', 'cheat'];
+      tabs.forEach(t => {
+        const sec = document.getElementById('section-' + t);
+        const btn = document.getElementById('tab-' + t);
+        if (t === tabId) {
+          sec.classList.remove('hidden');
+          btn.className = "nav-tab px-4 py-2 rounded-xl transition flex items-center gap-2 bg-indigo-600 text-white shadow-md shadow-indigo-500/20";
+        } else {
+          sec.classList.add('hidden');
+          btn.className = "nav-tab px-4 py-2 rounded-xl transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800";
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleTheme() {
+      const htmlEl = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      if (htmlEl.classList.contains('dark')) {
+        htmlEl.classList.remove('dark');
+        icon.className = "fa-solid fa-moon text-indigo-600";
+        localStorage.setItem('emle_theme', 'light');
+      } else {
+        htmlEl.classList.add('dark');
+        icon.className = "fa-solid fa-sun text-amber-400";
+        localStorage.setItem('emle_theme', 'dark');
+      }
+    }
+
+    // ==========================================
+    // 6. SCHEDULE & CHECKLIST ENGINE
+    // ==========================================
+    function renderDailyPlan() {
+      const grid = document.getElementById('dailyPlanGrid');
+      let totalTasks = 0;
+      let doneTasks = 0;
+
+      grid.innerHTML = DAILY_PLAN.map((dayObj) => {
+        const tasksHtml = dayObj.tasks.map(t => {
+          totalTasks++;
+          const isDone = !!checkedTasks[t.id];
+          if (isDone) doneTasks++;
+          return `
+            <label class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 cursor-pointer transition text-xs">
+              <input type="checkbox" ${isDone ? 'checked' : ''} onchange="togglePlanTask('${t.id}')" class="mt-0.5 w-4 h-4 rounded accent-indigo-600 cursor-pointer" />
+              <span class="${isDone ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-700 dark:text-slate-200 font-medium'}">${t.text}</span>
+            </label>
+          `;
+        }).join('');
+
+        return `
+          <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/80 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-black text-sm text-indigo-700 dark:text-indigo-300">${dayObj.day}</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${dayObj.badgeColor}">${dayObj.badge}</span>
+              </div>
+              <p class="text-xs font-bold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-900/70 p-2.5 rounded-xl border border-slate-200/60 dark:border-slate-800">
+                🎯 التركيز: ${dayObj.focus}
+              </p>
+              <div class="space-y-1 pt-1">
+                ${tasksHtml}
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-200/70 dark:border-slate-700/60 flex items-center justify-between">
+              <button onclick="openDayTarget('${dayObj.targetTab}', ${dayObj.storyIdx})" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
+                <span>افتح محتوى هذا اليوم</span>
+                <i class="fa-solid fa-arrow-left text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const pct = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
+      document.getElementById('planProgressPercent').textContent = pct + '%';
+    }
+
+    function togglePlanTask(taskId) {
+      checkedTasks[taskId] = !checkedTasks[taskId];
+      localStorage.setItem('emle_2026_tasks', JSON.stringify(checkedTasks));
+      renderDailyPlan();
+    }
+
+    function openDayTarget(tab, storyIdx) {
+      if (tab === 'stories') {
+        activeStoryIdx = storyIdx || 0;
+        renderStories();
+      }
+      switchTab(tab);
+    }
+
+    // ==========================================
+    // 7. BEDTIME STORY MODE ENGINE
+    // ==========================================
+    function renderStories() {
+      const nav = document.getElementById('storyChaptersNav');
+      nav.innerHTML = STORY_CHAPTERS.map((ch, idx) => {
+        const isActive = idx === activeStoryIdx;
+        return `
+          <button onclick="selectStoryChapter(${idx})" class="p-3.5 rounded-2xl border text-right transition flex flex-col justify-between ${
+            isActive
+              ? 'bg-gradient-to-br ' + ch.color + ' text-white border-transparent shadow-lg scale-[1.02]'
+              : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-400'
+          }">
+            <div class="flex items-center justify-between w-full mb-2">
+              <i class="fa-solid ${ch.icon} text-lg ${isActive ? 'text-white' : 'text-indigo-500'}"></i>
+              <span class="text-[11px] px-2 py-0.5 rounded-full font-black repeat-badge ${isActive ? 'bg-white/20 text-white' : 'bg-rose-500/10 text-rose-600 dark:text-rose-400'}">Top ${ch.maxRepeat}</span>
+            </div>
+            <div>
+              <div class="font-black text-xs sm:text-sm leading-snug">${ch.title}</div>
+              <div class="text-[10px] ${isActive ? 'text-white/80' : 'text-slate-400'} mt-0.5">${ch.subtitle}</div>
+            </div>
+          </button>
+        `;
+      }).join('');
+
+      const activeCh = STORY_CHAPTERS[activeStoryIdx];
+      const container = document.getElementById('activeStoryContainer');
+      container.innerHTML = `
+        <div class="border-b border-slate-200 dark:border-slate-800 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">${activeCh.subtitle}</span>
+            <h3 class="text-2xl sm:text-3xl font-black">${activeCh.title}</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300">${activeCh.intro}</p>
+          </div>
+          <div class="flex items-center gap-2 self-start">
+            <button onclick="openSpecialtyQuizFromStory('${activeCh.id}')" class="px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow transition flex items-center gap-2 whitespace-nowrap">
+              <i class="fa-solid fa-stethoscope"></i>
+              <span>اختبر نفسك في أسئلة هذه الحدوتة</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          ${activeCh.paragraphs.map(p => `
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/70 space-y-3">
+              <div class="flex items-center gap-2.5">
+                <span class="text-2xl">${p.icon}</span>
+                <h4 class="text-lg font-black text-indigo-700 dark:text-indigo-300">${p.heading}</h4>
+              </div>
+              <div class="text-sm sm:text-base leading-loose text-slate-800 dark:text-slate-200">
+                ${p.story}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      applyStoryMasking();
+    }
+
+    function selectStoryChapter(idx) {
+      activeStoryIdx = idx;
+      renderStories();
+    }
+
+    function toggleStoryAnswers() {
+      isStoryMasked = !isStoryMasked;
+      const btn = document.getElementById('toggleBlankBtn');
+      if (isStoryMasked) {
+        btn.innerHTML = `<i class="fa-solid fa-eye"></i><span>إظهار كل المصطلحات الإنجليزية</span>`;
+        btn.className = "px-4 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-black shadow-md transition flex items-center gap-2";
+      } else {
+        btn.innerHTML = `<i class="fa-solid fa-eye-slash"></i><span>وضع التسميع (إخفاء المصطلحات الإنجليزية)</span>`;
+        btn.className = "px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md transition flex items-center gap-2";
+      }
+      applyStoryMasking();
+    }
+
+    function applyStoryMasking() {
+      const terms = document.querySelectorAll('#activeStoryContainer .story-term');
+      terms.forEach(term => {
+        if (isStoryMasked) {
+          term.classList.add('masked');
+          term.onclick = function() {
+            this.classList.toggle('masked');
+          };
+        } else {
+          term.classList.remove('masked');
+          term.onclick = null;
+        }
+      });
+    }
+
+    function openSpecialtyQuizFromStory(chId) {
+      const map = {
+        peds: 'Pediatrics',
+        im: 'Internal Medicine',
+        surgery: 'General Surgery',
+        obgyn: 'Ob/Gyn',
+        er: 'Emergency',
+        ethics: 'Ethics & Safety'
+      };
+      const spec = map[chId] || 'ALL';
+      document.getElementById('quizSpecialtySelect').value = spec;
+      startNewQuiz();
+      switchTab('quiz');
+    }
+
+    // ==========================================
+    // 8. SMART FLASHCARDS ENGINE
+    // ==========================================
+    function setFcSpecialty(spec) {
+      fcSpecialty = spec;
+      document.querySelectorAll('.fc-spec-btn').forEach(btn => {
+        if (btn.getAttribute('data-spec') === spec) {
+          btn.className = "fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm";
+        } else {
+          btn.className = "fc-spec-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300";
+        }
+      });
+      renderFlashcards();
+    }
+
+    function renderFlashcards() {
+      const query = (document.getElementById('flashcardSearchInput').value || '').trim().toLowerCase();
+      const yieldFilter = document.getElementById('fcYieldFilter').value;
+      const grid = document.getElementById('flashcardsGrid');
+
+      const filtered = HIGH_YIELD_DB.filter(item => {
+        if (fcSpecialty !== 'ALL' && item.specialty !== fcSpecialty) return false;
+        if (yieldFilter === 'ULTRA' && item.repeats < 7) return false;
+        if (yieldFilter === 'HIGH' && (item.repeats < 4 || item.repeats >= 7)) return false;
+        if (yieldFilter === 'REVIEW' && cardStates[item.id] !== 'review') return false;
+        if (yieldFilter === 'MASTERED' && cardStates[item.id] !== 'mastered') return false;
+
+        if (query) {
+          const hay = (item.vignette + ' ' + item.keyFact + ' ' + item.arabicTip + ' ' + item.subtopic).toLowerCase();
+          return hay.includes(query);
+        }
+        return true;
+      });
+
+      updateMasteredCountHeader();
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-12 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
+            <i class="fa-solid fa-box-open text-4xl text-slate-400 mb-3"></i>
+            <p class="font-bold text-base">لا توجد بطاقات مطابقة لهذا الفلتر حالياً</p>
+            <p class="text-xs text-slate-400 mt-1">جرب تغيير التخصص أو مسح كلمة البحث.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const status = cardStates[item.id] || 'none';
+        const statusBadge = status === 'mastered'
+          ? '<span class="px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-500 text-[11px] font-bold">✅ متقنة</span>'
+          : status === 'review'
+          ? '<span class="px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-500 text-[11px] font-bold">📌 للمراجعة</span>'
+          : '';
+
+        return `
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5">
+                  <span class="px-2.5 py-0.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-bold">${item.specialty}</span>
+                  <span class="text-[11px] text-slate-400">${item.subtopic}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  ${statusBadge}
+                  <span class="px-2.5 py-0.5 rounded-full bg-rose-500 text-white text-xs font-black repeat-badge">x${item.repeats}</span>
+                </div>
+              </div>
+
+              <!-- Question / Scenario Front -->
+              <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/70 dark:border-slate-700/70">
+                <p class="text-[11px] font-bold text-slate-400 mb-1">Clinical Scenario:</p>
+                <p class="ltr-text text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed">${item.vignette}</p>
+              </div>
+
+              <!-- Collapsible Answer / Back -->
+              <div id="fc-ans-${item.id}" class="hidden space-y-2.5 pt-1">
+                <div class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
+                  <p class="text-[11px] font-black text-emerald-600 dark:text-emerald-400 mb-1">✅ Golden Key-Fact:</p>
+                  <p class="ltr-text text-xs font-bold text-slate-900 dark:text-white leading-relaxed">${item.keyFact}</p>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+                  <p class="text-xs text-slate-800 dark:text-amber-100 leading-relaxed">💡 <strong>شفرة اللجنة:</strong> ${item.arabicTip}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Footer -->
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+              <button onclick="toggleFcReveal('${item.id}')" id="fc-btn-${item.id}" class="flex-1 py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition">
+                إظهار الإجابة والشفرة
+              </button>
+              <button onclick="setCardStatus('${item.id}', 'mastered')" class="p-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold transition" title="حفظتها تماماً">
+                <i class="fa-solid fa-check"></i>
+              </button>
+              <button onclick="setCardStatus('${item.id}', 'review')" class="p-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-bold transition" title="راجعها تاني ليلة الامتحان">
+                <i class="fa-solid fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleFcReveal(id) {
+      const box = document.getElementById('fc-ans-' + id);
+      const btn = document.getElementById('fc-btn-' + id);
+      if (box.classList.contains('hidden')) {
+        box.classList.remove('hidden');
+        btn.textContent = 'إخفاء الإجابة';
+        btn.className = "flex-1 py-2 px-3 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold transition";
+      } else {
+        box.classList.add('hidden');
+        btn.textContent = 'إظهار الإجابة والشفرة';
+        btn.className = "flex-1 py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition";
+      }
+    }
+
+    function setCardStatus(id, status) {
+      if (cardStates[id] === status) {
+        delete cardStates[id];
+      } else {
+        cardStates[id] = status;
+      }
+      localStorage.setItem('emle_2026_cards', JSON.stringify(cardStates));
+      renderFlashcards();
+    }
+
+    function updateMasteredCountHeader() {
+      const count = Object.values(cardStates).filter(v => v === 'mastered').length;
+      document.getElementById('headerMasteredCount').textContent = count;
+    }
+
+    // ==========================================
+    // 9. INTERACTIVE CLINICAL MCQ SIMULATOR ENGINE
+    // ==========================================
+    function prepareQuestionWithShuffledOptions(qObj) {
+      const optObjs = qObj.options.map((text, idx) => ({
+        text,
+        isCorrect: idx === qObj.correct
+      }));
+      for (let i = optObjs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [optObjs[i], optObjs[j]] = [optObjs[j], optObjs[i]];
+      }
+      const newCorrectIdx = optObjs.findIndex(o => o.isCorrect);
+      return {
+        ...qObj,
+        shuffledOptions: optObjs.map(o => o.text),
+        shuffledCorrect: newCorrectIdx
+      };
+    }
+
+    function startNewQuiz(shouldShuffleQuestions = false) {
+      const spec = document.getElementById('quizSpecialtySelect').value;
+      let pool = HIGH_YIELD_DB.filter(q => spec === 'ALL' || q.specialty === spec);
+      if (shouldShuffleQuestions) {
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+      }
+      quizList = pool.map(q => prepareQuestionWithShuffledOptions(q));
+      currentQIndex = 0;
+      userAnswers = {};
+      resetQuizTimer();
+      renderQuizQuestion();
+    }
+
+    function shuffleAndRestartQuiz() {
+      startNewQuiz(true);
+    }
+
+    function resetQuizTimer() {
+      if (quizTimerInterval) clearInterval(quizTimerInterval);
+      quizSecondsRemaining = 7200;
+      quizTimerInterval = setInterval(() => {
+        if (quizSecondsRemaining > 0) {
+          quizSecondsRemaining--;
+          const hrs = String(Math.floor(quizSecondsRemaining / 3600)).padStart(2, '0');
+          const mins = String(Math.floor((quizSecondsRemaining % 3600) / 60)).padStart(2, '0');
+          const secs = String(quizSecondsRemaining % 60).padStart(2, '0');
+          const badge = document.getElementById('quizTimerBadge');
+          if (badge) badge.innerHTML = `<i class="fa-regular fa-clock ml-1"></i>${hrs}:${mins}:${secs}`;
+        }
+      }, 1000);
+    }
+
+    function renderQuizQuestion() {
+      if (quizList.length === 0) return;
+      const q = quizList[currentQIndex];
+      const total = quizList.length;
+
+      let correctCount = 0;
+      let wrongCount = 0;
+      Object.keys(userAnswers).forEach(idxKey => {
+        const qItem = quizList[idxKey];
+        if (userAnswers[idxKey] === qItem.shuffledCorrect) correctCount++;
+        else wrongCount++;
+      });
+      const answeredCount = correctCount + wrongCount;
+      const acc = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+
+      document.getElementById('currentQIndexText').textContent = currentQIndex + 1;
+      document.getElementById('totalQCountText').textContent = total;
+      document.getElementById('correctScoreText').textContent = correctCount;
+      document.getElementById('wrongScoreText').textContent = wrongCount;
+      document.getElementById('accuracyScoreText').textContent = acc + '%';
+      document.getElementById('quizProgressBar').style.width = Math.max(2, Math.round(((currentQIndex + 1) / total) * 100)) + '%';
+
+      const selectedOpt = userAnswers[currentQIndex];
+      const isAnswered = selectedOpt !== undefined;
+      const letters = ['A', 'B', 'C', 'D'];
+
+      const optionsHtml = q.shuffledOptions.map((optText, optIdx) => {
+        let btnStyle = "bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-indigo-500 text-slate-800 dark:text-slate-100";
+        let iconHtml = `<span class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center font-black text-xs">${letters[optIdx]}</span>`;
+
+        if (isAnswered) {
+          if (optIdx === q.shuffledCorrect) {
+            btnStyle = "bg-emerald-500/15 border-2 border-emerald-500 text-emerald-950 dark:text-emerald-200 font-bold";
+            iconHtml = `<span class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center font-black text-xs"><i class="fa-solid fa-check"></i></span>`;
+          } else if (optIdx === selectedOpt && selectedOpt !== q.shuffledCorrect) {
+            btnStyle = "bg-rose-500/15 border-2 border-rose-500 text-rose-950 dark:text-rose-200";
+            iconHtml = `<span class="w-7 h-7 rounded-lg bg-rose-500 text-white flex items-center justify-center font-black text-xs"><i class="fa-solid fa-xmark"></i></span>`;
+          } else {
+            btnStyle = "bg-slate-50/50 dark:bg-slate-800/30 border-slate-200/50 dark:border-slate-800 text-slate-400 opacity-65";
+          }
+        }
+
+        return `
+          <button
+            ${isAnswered ? 'disabled' : `onclick="selectQuizOption(${optIdx})"`}
+            class="w-full p-4 rounded-2xl border text-left ltr-text transition flex items-center gap-3.5 ${btnStyle}"
+          >
+            ${iconHtml}
+            <span class="text-xs sm:text-sm leading-relaxed flex-1">${optText}</span>
+          </button>
+        `;
+      }).join('');
+
+      const explanationHtml = isAnswered ? `
+        <div class="p-5 rounded-2xl ${selectedOpt === q.shuffledCorrect ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-rose-500/10 border border-rose-500/30'} space-y-3 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-sm ${selectedOpt === q.shuffledCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
+              ${selectedOpt === q.shuffledCorrect ? '🎉 إجابة صحيحة ممتازة يا دكتور!' : '⚠️ إجابة غير دقيقة - احفظ القاعدة الذهبية دي:'}
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-rose-500 text-white repeat-badge">تكرر x${q.repeats}</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/60 dark:border-slate-800">
+            <p class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 mb-1">Official Key-Fact:</p>
+            <p class="ltr-text text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-relaxed">${q.keyFact}</p>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+            💡 <strong>الشرح والشفرة السريعة:</strong> ${q.arabicTip}
+          </p>
+        </div>
+      ` : '';
+
+      const card = document.getElementById('activeQuestionCard');
+      card.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-black">${q.specialty}</span>
+            <span class="text-xs text-slate-400 font-bold">• ${q.subtopic}</span>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400 text-xs font-black repeat-badge">
+            🔥 High-Yield Repeat: x${q.repeats}
+          </span>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/70">
+          <p class="ltr-text text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
+            ${q.vignette}
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          ${optionsHtml}
+        </div>
+
+        ${explanationHtml}
+
+        <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+          <button
+            onclick="prevQuizQuestion()"
+            ${currentQIndex === 0 ? 'disabled' : ''}
+            class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-40 text-xs font-bold transition flex items-center gap-2"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>السؤال السابق</span>
+          </button>
+
+          <button
+            onclick="nextQuizQuestion()"
+            ${currentQIndex === total - 1 ? 'disabled' : ''}
+            class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white text-xs font-bold shadow transition flex items-center gap-2"
+          >
+            <span>السؤال التالي</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+      `;
+
+      renderQuestionPills();
+    }
+
+    function selectQuizOption(optIdx) {
+      userAnswers[currentQIndex] = optIdx;
+      const q = quizList[currentQIndex];
+      if (optIdx === q.shuffledCorrect) {
+        cardStates[q.id] = 'mastered';
+      } else {
+        cardStates[q.id] = 'review';
+      }
+      localStorage.setItem('emle_2026_cards', JSON.stringify(cardStates));
+      updateMasteredCountHeader();
+      renderQuizQuestion();
+    }
+
+    function nextQuizQuestion() {
+      if (currentQIndex < quizList.length - 1) {
+        currentQIndex++;
+        renderQuizQuestion();
+      }
+    }
+
+    function prevQuizQuestion() {
+      if (currentQIndex > 0) {
+        currentQIndex--;
+        renderQuizQuestion();
+      }
+    }
+
+    function jumpToQuestion(idx) {
+      currentQIndex = idx;
+      renderQuizQuestion();
+    }
+
+    function renderQuestionPills() {
+      const container = document.getElementById('questionPillsContainer');
+      container.innerHTML = quizList.map((q, idx) => {
+        const ans = userAnswers[idx];
+        let pillClass = "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300";
+        if (ans !== undefined) {
+          pillClass = ans === q.shuffledCorrect
+            ? "bg-emerald-500 text-white font-black"
+            : "bg-rose-500 text-white font-black";
+        }
+        if (idx === currentQIndex) {
+          pillClass += " ring-2 ring-indigo-500 scale-110";
+        }
+        return `
+          <button onclick="jumpToQuestion(${idx})" class="w-8 h-8 rounded-lg text-xs font-bold transition flex items-center justify-center ${pillClass}">
+            ${idx + 1}
+          </button>
+        `;
+      }).join('');
+    }
+
+    // ==========================================
+    // 10. EXAM EVE CHEAT SHEET & COUNTDOWN
+    // ==========================================
+    function renderTopMonsters() {
+      const listEl = document.getElementById('topMonstersList');
+      const sorted = [...HIGH_YIELD_DB].sort((a, b) => b.repeats - a.repeats).slice(0, 18);
+      listEl.innerHTML = sorted.map((item, idx) => `
+        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black text-indigo-600 dark:text-indigo-400">#${idx + 1} • ${item.specialty} (${item.subtopic})</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-500 text-white text-xs font-black repeat-badge">x${item.repeats}</span>
+          </div>
+          <p class="ltr-text text-xs font-bold text-slate-900 dark:text-white leading-relaxed">${item.keyFact}</p>
+          <p class="text-[11px] text-slate-600 dark:text-slate-300">💡 ${item.arabicTip}</p>
+        </div>
+      `).join('');
+    }
+
+    function updateExamCountdown() {
+      const target = new Date('2026-11-25T11:00:00').getTime();
+      const now = new Date().getTime();
+      const diff = target - now;
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const box = document.getElementById('mainCountdownBox');
+        if (box) box.textContent = `باقي ${days} يوم و ${hours} ساعة`;
+      }
+    }
+
+    // ==========================================
+    // 11. INITIALIZATION ON PAGE LOAD
+    // ==========================================
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('emle_theme');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('themeIcon').className = "fa-solid fa-moon text-indigo-600";
+      }
+
+      renderDailyPlan();
+      renderStories();
+      renderFlashcards();
+      startNewQuiz(false);
+      renderTopMonsters();
+      updateExamCountdown();
+    });
+  </script>
+</body>
+</html>
